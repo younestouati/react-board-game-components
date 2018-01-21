@@ -1,0 +1,15 @@
+.card-stack {
+    border: 2px dashed lightgray;
+    position: relative;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.card-stack > * {
+    margin: -2px 0 0 -2px; /* Top and left margin should match border width (just minus instead) */
+}
+
+.stack-item {
+    z-index: 1;
+}

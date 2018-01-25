@@ -1,8 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import Chip from './chip/chip';
+import HexTile from './hex-tile/hex-tile';
+import SquareTile from './square-tile/square-tile';
+import PlayingCard from './playing-card/playing-card';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+export {
+    Chip,
+    HexTile,
+    SquareTile,
+    PlayingCard
+};

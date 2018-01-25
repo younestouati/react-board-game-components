@@ -1,25 +1,38 @@
 {
   "name": "react-board-game-components",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-hexagon": "^1.1.3",
-    "react-scripts": "1.0.17"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s docs",
-    "build-storybook": "build-storybook -o docs"
-  },
+  "version": "0.0.1",
+  "main": "dist/react-board-game-components.cjs.js",
+  "module": "dist/react-board-game-components.esm.js",
+  "browser": "dist/react-board-game-components.umd.js",
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.3",
     "@storybook/addon-knobs": "^3.3.6",
     "@storybook/addon-links": "^3.3.3",
-    "@storybook/react": "^3.3.3"
-  }
+    "@storybook/react": "^3.3.3",
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-image": "^1.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"  
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "pretest": "npm run build",
+    "storybook": "start-storybook -p 9009 -s docs",
+    "build-storybook": "build-storybook -o docs"
+  },
+  "files": [
+    "dist"
+  ]
 }

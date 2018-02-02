@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {CustomPropTypes} from './custom-prop-types';
 import {Flipper} from '../flipper/flipper';
-import StandardCards from './standard-cards';
-import DefaultBack from './assets/default-back.jpg'
 import {parseRank} from './parse-rank';
 
 const DEFAULT_CARD_WIDTH = 210;
@@ -30,6 +28,7 @@ const PlayingCard = (props) => {
 	const {
 		suit,
 		rank,
+		standardDeck,
 		borderRadius,
 		animateRotation,
 		front,
@@ -51,7 +50,7 @@ const PlayingCard = (props) => {
 			? (border ? {border: '1px solid #efefef'} : {})
 			: {border};
 	const borderRadiusStyle = isBool(borderRadius) 
-			? (borderRadius ? {borderRadius: '6px'} : {})
+			? (borderRadius ? {borderRadius: '18px'} : {})
 			: {borderRadius};
 
 	const styles = {
@@ -63,7 +62,7 @@ const PlayingCard = (props) => {
 
 	const renderSide = (side) => isObj(side) 
 		? <div style={styles}>{side}</div>
-		: <div style={{backgroundImage: `url(${side})`, ...styles}}/>
+		: <div style={{backgroundImage: `url(${standardDeck}#${side})`, ...styles}}/>
 
 	return (
 		<div
@@ -73,8 +72,8 @@ const PlayingCard = (props) => {
 			}}
 		>
 			<Flipper isFlipped={!faceUp} rotation={rotation} animateRotation={animateRotation}>
-				{renderSide(front || StandardCards[suit][parseRank(rank) - 1])}
-				{renderSide(back || DefaultBack)}
+				{renderSide(front || parseRank(rank) + (suit ? suit.charAt(0) : ''))}
+				{renderSide(back || 'back')}
 			</Flipper>
 		</div>
 	);
@@ -83,6 +82,7 @@ const PlayingCard = (props) => {
 PlayingCard.propTypes = {
 	suit: CustomPropTypes.suit,
 	rank: CustomPropTypes.rank,
+	standardDeck: PropTypes.string,
 	front: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	back: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	faceUp: PropTypes.bool,

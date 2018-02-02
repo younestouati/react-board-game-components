@@ -1,5 +1,6 @@
 import React from 'react';
 import {text, select, boolean, number} from '@storybook/addon-knobs/react';
+import Cards from '@younestouati/playing-cards-standard-deck';
 
 import {storiesOf} from '@storybook/react';
 
@@ -16,6 +17,8 @@ import CustomDemoCardBack from './custom-demo-cards/back';
 const containerStyle = {display: 'flex', flexWrap: 'wrap'};
 const wrapperStyle = {margin: '0 10px 10px 0'};
 
+console.log('The cards are: ', Cards);
+
 storiesOf('PlayingCard', module)
   .add('Standard Cards', () => {
     const suits = ['hearts', 'clubs', 'spades', 'diamonds'];
@@ -25,12 +28,12 @@ storiesOf('PlayingCard', module)
         {
           suits.map(suit => Array(13).fill().map((_, rank) => (
             <div style={wrapperStyle} key={`${suit}_${rank}`}>
-              <PlayingCard suit={suit} rank={(rank + 1)}/>
+              <PlayingCard suit={suit} rank={(rank + 1)} standardDeck={Cards}/>
             </div>
           )))
         }
         <div style={wrapperStyle}>
-          <PlayingCard rank="joker"/>
+          <PlayingCard rank="joker" standardDeck={Cards}/>
         </div>
       </div>
     );

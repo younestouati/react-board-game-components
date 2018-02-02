@@ -1,6 +1,22 @@
 {
   "name": "react-board-game-components",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "keywords": [
+    "react",
+    "boardgame",
+    "boardgames",
+    "board game",
+    "board games",
+    "board-game",
+    "board-games",
+    "boardgame components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/younestouati/react-board-game-components.git"
+  },
+  "author": "Younes Touati <younestouati@gmail.com>",
+  "license": "MIT",
   "main": "dist/react-board-game-components.cjs.js",
   "module": "dist/react-board-game-components.esm.js",
   "browser": "dist/react-board-game-components.umd.js",
@@ -9,6 +25,7 @@
     "@storybook/addon-knobs": "^3.3.6",
     "@storybook/addon-links": "^3.3.3",
     "@storybook/react": "^3.3.3",
+    "@younestouati/playing-cards-standard-deck": "1.0.0",
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
@@ -23,7 +40,7 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-dom": "*"  
+    "react-dom": "*"
   },
   "scripts": {
     "build": "rollup -c",

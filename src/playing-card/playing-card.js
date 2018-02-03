@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {CustomPropTypes} from './custom-prop-types';
 import {Flipper} from '../flipper/flipper';
-import {parseRank} from './parse-rank';
 
 const DEFAULT_CARD_WIDTH = 210;
 const DEFAULT_CARD_HEIGHT = 300;
@@ -26,9 +25,10 @@ const baseStyles = {
 
 const PlayingCard = (props) => {
 	const {
-		suit,
-		rank,
-		standardDeck,
+		deck,
+		card,
+		frontFragment,
+		backFragment,
 		borderRadius,
 		animateRotation,
 		front,
@@ -50,7 +50,7 @@ const PlayingCard = (props) => {
 			? (border ? {border: '1px solid #efefef'} : {})
 			: {border};
 	const borderRadiusStyle = isBool(borderRadius) 
-			? (borderRadius ? {borderRadius: '18px'} : {})
+			? (borderRadius ? {borderRadius: '6px'} : {})
 			: {borderRadius};
 
 	const styles = {
@@ -61,8 +61,8 @@ const PlayingCard = (props) => {
 	};
 
 	const renderSide = (side) => isObj(side) 
-		? <div style={styles}>{side}</div>
-		: <div style={{backgroundImage: `url(${standardDeck}#${side})`, ...styles}}/>
+			? <div style={styles}>{side}</div>
+			: <div style={{backgroundImage: `url(${side})`, ...styles}}/>;
 
 	return (
 		<div
@@ -72,17 +72,22 @@ const PlayingCard = (props) => {
 			}}
 		>
 			<Flipper isFlipped={!faceUp} rotation={rotation} animateRotation={animateRotation}>
-				{renderSide(front || parseRank(rank) + (suit ? suit.charAt(0) : ''))}
-				{renderSide(back || 'back')}
+				{front 
+					? renderSide(front) 
+					: <div style={{backgroundImage: `url(${deck}#${frontFragment(card)})`, ...styles}}/>}
+				{back 
+					? renderSide(back)
+					: <div style={{backgroundImage: `url(${deck}#${backFragment(card)})`, ...styles}}/>}
 			</Flipper>
 		</div>
 	);
 }
 
 PlayingCard.propTypes = {
-	suit: CustomPropTypes.suit,
-	rank: CustomPropTypes.rank,
-	standardDeck: PropTypes.string,
+	deck: PropTypes.string,
+	frontFragment: PropTypes.func,
+	backFragment: PropTypes.func,
+	card: PropTypes.object,
 	front: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	back: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	faceUp: PropTypes.bool,
@@ -100,9 +105,34 @@ PlayingCard.defaultProps = {
 	borderRadius: true,
 	border: true,
 	shadow: true,
-	rotation: 0,
-	suit: 'hearts',
-	rank: 1
+	rotation: 0
 };
 
-export default PlayingCard;
+const defaultFrontFragment = (card = {rank: 1, suit: 'hearts'}) => {
+	let r = typeof card.rank === 'string' ? card.rank.toLowerCase() : card.rank;
+	r = r === 'ace' ? 1 : r;
+	r = r === 'jack' ? 11 : r;
+	r = r === 'queen' ? 12 : r;
+	r = r === 'king' ? 13 : r;
+
+	return card.joker ? 'joker' : (r + card.suit.charAt(0));
+}
+
+const defaultBackFragment = () => 'back';
+
+const makeDeck = (
+	svgStack,
+	frontFragment = defaultFrontFragment,
+	backFragment = defaultBackFragment
+) => (
+	(props) => (
+		<PlayingCard
+			{...props}
+			deck={svgStack}
+			frontFragment={frontFragment}
+			backFragment={backFragment}
+		/>
+	)
+);
+
+export {PlayingCard, makeDeck};

@@ -1,10 +1,10 @@
 import React from 'react';
-import {text, select, boolean, number} from '@storybook/addon-knobs/react';
-import Cards from '@younestouati/playing-cards-standard-deck';
+import {text, select, boolean, number, object} from '@storybook/addon-knobs/react';
+import Deck from '@younestouati/playing-cards-standard-deck';
 
 import {storiesOf} from '@storybook/react';
 
-import PlayingCard from './playing-card';
+import {PlayingCard, makeDeck} from './playing-card';
 //https://www.fairway3games.com/free-poker-sized-card-templates/
 import Custom1Front from './assets/custom-card-2-with-text.png';
 import Custom1Back from './assets/custom-card-2-with-text-back-side.png';
@@ -17,7 +17,7 @@ import CustomDemoCardBack from './custom-demo-cards/back';
 const containerStyle = {display: 'flex', flexWrap: 'wrap'};
 const wrapperStyle = {margin: '0 10px 10px 0'};
 
-console.log('The cards are: ', Cards);
+const StandardDeck = makeDeck(Deck);
 
 storiesOf('PlayingCard', module)
   .add('Standard Cards', () => {
@@ -28,12 +28,12 @@ storiesOf('PlayingCard', module)
         {
           suits.map(suit => Array(13).fill().map((_, rank) => (
             <div style={wrapperStyle} key={`${suit}_${rank}`}>
-              <PlayingCard suit={suit} rank={(rank + 1)} standardDeck={Cards}/>
+              <StandardDeck card={{suit, rank: rank + 1 }}/>
             </div>
           )))
         }
         <div style={wrapperStyle}>
-          <PlayingCard rank="joker" standardDeck={Cards}/>
+          <StandardDeck card={{joker: true}}/>
         </div>
       </div>
     );
@@ -82,9 +82,12 @@ storiesOf('PlayingCard', module)
     );
   })
   .add('Playground', () => (
-    <PlayingCard
-      suit={select('Suit', ['hearts', 'spades', 'clubs', 'diamonds'])}
-      rank={number('rank', 7)}
+    <StandardDeck
+      card={object('card', {
+        suit: 'heart',
+        rank: 7,
+        joker: false
+      })}
       front={text('front', undefined)}
       back={text('back', undefined)}
       faceUp={boolean('faceUp', true)}

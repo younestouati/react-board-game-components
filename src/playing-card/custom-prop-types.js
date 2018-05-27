@@ -19,7 +19,7 @@ const createCaseInsentivePropType = (validValues, isRequired) => {
 		}
 
         const isValid = validValues.indexOf(caseInsensitiveProp) > -1;
-        
+
 		if (!isValid) {
 			return new Error(`${propName} in ${componentName} must be one of the Values: ${validValues.join(', ')}`);
 		}

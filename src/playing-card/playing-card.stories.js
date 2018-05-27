@@ -4,7 +4,8 @@ import Deck from '@younestouati/playing-cards-standard-deck';
 
 import {storiesOf} from '@storybook/react';
 
-import {PlayingCard, makeDeck} from './playing-card';
+import PlayingCard from './playing-card';
+import makeStandardDeck from './make-standard-deck';
 //https://www.fairway3games.com/free-poker-sized-card-templates/
 import Custom1Front from './assets/custom-card-2-with-text.png';
 import Custom1Back from './assets/custom-card-2-with-text-back-side.png';
@@ -17,7 +18,7 @@ import CustomDemoCardBack from './custom-demo-cards/back';
 const containerStyle = {display: 'flex', flexWrap: 'wrap'};
 const wrapperStyle = {margin: '0 10px 10px 0'};
 
-const StandardDeck = makeDeck(Deck);
+const StandardDeck = makeStandardDeck(Deck);
 
 storiesOf('PlayingCard', module)
   .add('Standard Cards', () => {
@@ -28,12 +29,22 @@ storiesOf('PlayingCard', module)
         {
           suits.map(suit => Array(13).fill().map((_, rank) => (
             <div style={wrapperStyle} key={`${suit}_${rank}`}>
-              <StandardDeck card={{suit, rank: rank + 1 }}/>
+              <StandardDeck
+                suit={suit}
+                rank={rank + 1}
+                faceUp={boolean('faceUp', true)}
+                borderRadius={text('borderRadius', '6px')}
+                border={false}
+              />
             </div>
           )))
         }
         <div style={wrapperStyle}>
-          <StandardDeck card={{joker: true}}/>
+          <StandardDeck
+            isJoker={true}
+            faceUp={boolean('faceUp', true)}
+            borderRadius={text('borderRadius', '6px')}
+          />
         </div>
       </div>
     );
@@ -81,22 +92,40 @@ storiesOf('PlayingCard', module)
       </div>
     );
   })
-  .add('Playground', () => (
-    <StandardDeck
-      card={object('card', {
-        suit: 'heart',
-        rank: 7,
-        joker: false
-      })}
-      front={text('front', undefined)}
-      back={text('back', undefined)}
-      faceUp={boolean('faceUp', true)}
-      rotation={number('rotation', 0, {min: -360, max: 360, step: 1, range: true})}
-      animateRotation={boolean('animateRotation', true)}
-      shadow={boolean('shadow', true)}
-      border={boolean('border', true)}
-      borderRadius={number('borderRadius', 6, {min: 0, max: 100, step: 1, range: true})}
-      width={number('width', 210)}
-      height={number('height', 300)}
-    />
-  ));
+  .add('Playground', () => {
+    const suits = ['hearts', 'clubs', 'spades', 'diamonds'];
+    const ranks = {
+      ace: 1,
+      '2': 2,
+      '3': 3,
+      '4': 4,
+      '5': 5,
+      '6': 6,
+      '7': 7,
+      '8': 8,
+      '9': 9,
+      '10': 10,
+      'jack': 11,
+      'queen': 12,
+      'king': 13,
+    }
+
+    return (
+      <StandardDeck
+        suit={select('hearts', suits)}
+        rank={select('rank', ranks)}
+        isJoker={boolean('isJoker', false)}
+        front={text('front', undefined)}
+        back={text('back', undefined)}
+        faceUp={boolean('faceUp', true)}
+        rotation={number('rotation', 0, {min: -360, max: 360, step: 1, range: true})}
+        animateRotation={boolean('animateRotation', true)}
+        shadow={boolean('shadow', true)}
+        border={boolean('border', true)}
+        borderRadius={text('borderRadius', '6px')}
+        width={number('width', 210)}
+        height={number('height', 300)}
+      />
+    );
+  }
+);

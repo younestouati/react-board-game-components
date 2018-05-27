@@ -25,10 +25,6 @@ const baseStyles = {
 
 const PlayingCard = (props) => {
 	const {
-		deck,
-		card,
-		frontFragment,
-		backFragment,
 		borderRadius,
 		animateRotation,
 		front,
@@ -72,29 +68,21 @@ const PlayingCard = (props) => {
 			}}
 		>
 			<Flipper isFlipped={!faceUp} rotation={rotation} animateRotation={animateRotation}>
-				{front 
-					? renderSide(front) 
-					: <div style={{backgroundImage: `url(${deck}#${frontFragment(card)})`, ...styles}}/>}
-				{back 
-					? renderSide(back)
-					: <div style={{backgroundImage: `url(${deck}#${backFragment(card)})`, ...styles}}/>}
+				{renderSide(front)}
+				{renderSide(back)}
 			</Flipper>
 		</div>
 	);
 }
 
 PlayingCard.propTypes = {
-	deck: PropTypes.string,
-	frontFragment: PropTypes.func,
-	backFragment: PropTypes.func,
-	card: PropTypes.object,
 	front: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	back: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	faceUp: PropTypes.bool,
 	rotation: PropTypes.number,
 	shadow: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	border: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-	borderRadius: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
+	borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 	animateRotation: PropTypes.bool,
 	width: PropTypes.number,
 	height: PropTypes.number
@@ -108,31 +96,4 @@ PlayingCard.defaultProps = {
 	rotation: 0
 };
 
-const defaultFrontFragment = (card = {rank: 1, suit: 'hearts'}) => {
-	let r = typeof card.rank === 'string' ? card.rank.toLowerCase() : card.rank;
-	r = r === 'ace' ? 1 : r;
-	r = r === 'jack' ? 11 : r;
-	r = r === 'queen' ? 12 : r;
-	r = r === 'king' ? 13 : r;
-
-	return card.joker ? 'joker' : (r + card.suit.charAt(0));
-}
-
-const defaultBackFragment = () => 'back';
-
-const makeDeck = (
-	svgStack,
-	frontFragment = defaultFrontFragment,
-	backFragment = defaultBackFragment
-) => (
-	(props) => (
-		<PlayingCard
-			{...props}
-			deck={svgStack}
-			frontFragment={frontFragment}
-			backFragment={backFragment}
-		/>
-	)
-);
-
-export {PlayingCard, makeDeck};
+export default PlayingCard;

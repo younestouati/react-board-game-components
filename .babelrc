@@ -7,5 +7,10 @@
         "modules": false
       }]
     ],
+    "env": {
+      "test": {
+        "presets": [["env"], "react"]
+      }
+    },
     "plugins": ["transform-react-jsx", "transform-object-rest-spread"]
-  }
+}

@@ -1,14 +1,31 @@
 {
   "name": "react-board-game-components",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "keywords": [
+    "react",
+    "boardgame",
+    "boardgames",
+    "board game",
+    "board games",
+    "board-game",
+    "board-games",
+    "boardgame components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/younestouati/react-board-game-components.git"
+  },
+  "author": "Younes Touati <younestouati@gmail.com>",
+  "license": "MIT",
   "main": "dist/react-board-game-components.cjs.js",
   "module": "dist/react-board-game-components.esm.js",
   "browser": "dist/react-board-game-components.umd.js",
   "devDependencies": {
-    "@storybook/addon-actions": "^3.3.3",
+    "@storybook/addon-actions": "^3.3.11",
     "@storybook/addon-knobs": "^3.3.6",
-    "@storybook/addon-links": "^3.3.3",
-    "@storybook/react": "^3.3.3",
+    "@storybook/addon-links": "^3.3.11",
+    "@storybook/react": "^3.3.11",
+    "@younestouati/playing-cards-standard-deck": "2.0.0",
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
@@ -19,20 +36,22 @@
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-image": "^1.0.2",
-    "rollup-plugin-node-resolve": "^3.0.0"
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "@storybook/addons": "^3.3.11"
   },
   "peerDependencies": {
     "react": "*",
-    "react-dom": "*"  
+    "react-dom": "*"
   },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "pretest": "npm run build",
-    "storybook": "start-storybook -p 9009 -s docs",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o docs"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {}
 }

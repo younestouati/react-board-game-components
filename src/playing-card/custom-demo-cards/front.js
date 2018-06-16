@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Custom2FrontNoText from '../assets/custom-card-4.png';
 import sword from '../assets/sword.png';
 
-class Front extends Component{
+class Front extends React.Component{
     constructor(props) {
         super(props);
 

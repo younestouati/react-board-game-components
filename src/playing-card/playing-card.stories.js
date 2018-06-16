@@ -18,7 +18,11 @@ import CustomDemoCardBack from './custom-demo-cards/back';
 const containerStyle = {display: 'flex', flexWrap: 'wrap'};
 const wrapperStyle = {margin: '0 10px 10px 0'};
 
-const StandardDeck = makeStandardDeck(Deck);
+const StandardDeck = makeStandardDeck(
+  Deck,
+  {}, 
+  {backgroundSize: '7px 10px', backgroundClip: 'content-box', padding: '5%', backgroundRepeat: 'repeat'}
+);
 
 storiesOf('PlayingCard', module)
   .add('Standard Cards', () => {
@@ -92,7 +96,7 @@ storiesOf('PlayingCard', module)
       </div>
     );
   })
-  .add('Playground', () => {
+  .add('Playground (Standard Deck)', () => {
     const suits = ['hearts', 'clubs', 'spades', 'diamonds'];
     const ranks = {
       ace: 1,
@@ -115,8 +119,6 @@ storiesOf('PlayingCard', module)
         suit={select('hearts', suits)}
         rank={select('rank', ranks)}
         isJoker={boolean('isJoker', false)}
-        front={text('front', undefined)}
-        back={text('back', undefined)}
         faceUp={boolean('faceUp', true)}
         rotation={number('rotation', 0, {min: -360, max: 360, step: 1, range: true})}
         animateRotation={boolean('animateRotation', true)}
@@ -125,7 +127,23 @@ storiesOf('PlayingCard', module)
         borderRadius={text('borderRadius', '6px')}
         width={number('width', 210)}
         height={number('height', 300)}
+        aspectRatio={number('aspectRatio', 210/300)}
       />
-    );
-  }
-);
+    )
+    }).add('Playground (Custom Cards)', () => {  
+      return (
+        <PlayingCard
+          front={text('front', 'https://i.imgur.com/r5ZuuBn.jpg')}
+          back={text('back', 'https://i.imgur.com/YtkhlRj.jpg')}
+          faceUp={boolean('faceUp', true)}
+          rotation={number('rotation', 0, {min: -360, max: 360, step: 1, range: true})}
+          animateRotation={boolean('animateRotation', true)}
+          shadow={boolean('shadow', true)}
+          border={boolean('border', true)}
+          borderRadius={text('borderRadius', '6px')}
+          width={number('width', 210)}
+          height={number('height', 300)}
+          aspectRatio={number('aspectRatio', 210/300)}
+        />
+      )
+    });

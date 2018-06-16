@@ -1,114 +1,105 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import PlayingCard, {DEFAULT_CARD_HEIGHT, DEFAULT_CARD_WIDTH} from '../playing-card/playing-card';
+import {DEFAULT_CARD_WIDTH, DEFAULT_CARD_HEIGHT} from '../playing-card/playing-card';
+import isNullOrUndefined from '../utils/is-null-or-undefined';
 import './card-stack.css';
 
-class CardStack extends Component {
-	animateShuffling(duration) {
+const randomNumbers = [0.14, 0.27, 0.08, 0.40, 0.97, 0.73, 0.33, 0.02, 0.58, 0.91];
 
-	}
-	
-	render() {
-		const {children, width, height, flipped, mode, rowSpacing, messAngle, stackLayerOffset, stackLayerMaxOffset, style} = this.props;
-		let xOffset = 0;
-		let sizeStyle = {};
+const CardStackContext = React.createContext({
+	isInStack: false,
+});
 
-		if (width) {
-			sizeStyle.width = width + 'px';
+class CardStack extends React.Component { 
+    render() {
+		const { 
+			children,
+			messy,
+			faceUp,
+			messAngle,
+			stackLayerOffset,
+			stackLayerMaxOffset,
+			style,
+			width: rawWidth,
+			height: rawHeight,
+		} = this.props;
+
+		const isHeightSet = !isNullOrUndefined(this.props.height) && this.props.height !== 0;
+		const width = isNaN(this.props.width) ? this.props.width : `${this.props.width}px`;
+		let height, paddingTop = 0;
+		
+		if (isHeightSet) {
+			height = this.props.height;
+		} else {
+			paddingTop = `${100/this.props.aspectRatio}%`;
 		}
 
-		if (height) {
-			sizeStyle.height = height + 'px';
-		}
+        return (
+			<CardStackContext.Provider
+				value={{
+					isInStack: true,
+					faceUpStack: faceUp,
+				}}
+			>
+				<div className="card-stack" style={{
+					...style,
+					width,
+					height,
+					position: 'relative',
+					display: 'inline-block'
+				}}>
+					<div
+						style={{
+							float: 'left',
+							paddingTop
+						}}
+					/>
+					<div
+						style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}
+					>
+						{
+							React.Children.map(children, (child, i) => {
+								const stackItemStyle = messy
+									? { 'transform': `rotate(${randomNumbers[i % randomNumbers.length] * messAngle - messAngle/2}deg)` }
+									: { 'transform': `translate(${Math.min(i * stackLayerOffset, stackLayerMaxOffset)}px,${Math.min(i * stackLayerOffset, stackLayerMaxOffset)}px)` };
 
-		if (!children || (Array.isArray(children) && !children.length)) {
-			return (
-				<div className="card-stack empty-card-stack" style={{...style, ...sizeStyle}}/>
-			);
-		}
-
-		return (
-			<div className="card-stack" style={{...style, ...sizeStyle}}>
-			{
-				React.Children.map(children, (child, i) => {
-					//Cloned children and set default props (childs own props takes precedence, though)
-					const clonedChild = React.cloneElement(child, {width, height, flipped, ...child.props});
-					let stackStyle = {};
-
-					switch (mode) {
-						case 'stack':
-							stackStyle  = {
-								'left': Math.min(i * stackLayerOffset, stackLayerMaxOffset) + 'px',
-								'top': Math.min(i * stackLayerOffset, stackLayerMaxOffset) + 'px'
-							};
-							break;
-						case 'fan':
-							const fanAngle = Math.min(children.length * 7, 300);
-
-							stackStyle = {
-								'transform': `rotate(${(-fanAngle/2 + (fanAngle/(children.length - 1) * i))}deg)`,
-								'transformOrigin': '50% 110%'
-							};
-							break;
-						case 'row':
-							stackStyle  = {
-								'transform': `translateX(${xOffset}px)`
-							};
-							xOffset += (child.props.width || width || DEFAULT_CARD_WIDTH) + rowSpacing;
-							break;
-						case 'messy-stack':
-							//TODO: MAKE SURE NOT TO HAVE A RANDOM FUNCTION IN HERE. MAKES IT UNPURE!!
-							stackStyle  = {
-								'transform': `rotate(${Math.random() * messAngle - messAngle/2}deg)`,
-							};
-							break;
-						default:
-							stackStyle  = {};
-							break;
-					};
-
-					return (
-						<div className="stack-item" style={{left: 0, top: 0, ...stackStyle}}>
-							{clonedChild}
-						</div>
-					);
-				})
-			}
-			</div>
-		);
-	}
+								return (
+									<div className="card-stack-item" style={stackItemStyle}>
+										{child}
+									</div>
+								);
+							})
+						}
+					</div>
+				</div>
+			</CardStackContext.Provider>
+        );
+    }
 }
 
 CardStack.propTypes = {
-	children: function (props, propName, componentName) {
-		const prop = props[propName];
-
-		let error = null;
-		React.Children.forEach(prop, function (child) {
-			if (child.type !== PlayingCard) {
-				error = new Error(`${componentName} children should be of type 'PlayingCard' not '${child.type}'`);
-			}
-		});
-		return error;
-	},
-	width: PropTypes.number,
-	height: PropTypes.number,
+	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 	style: PropTypes.object,
-	flipped: PropTypes.bool,
-	mode: PropTypes.oneOf(['fan', 'stack', 'row', 'messy-stack']),
-	rowSpacing: PropTypes.number,
-	messAngle: PropTypes.number,
-	stackLayerOffset: PropTypes.number,
-	stackLayerMaxOffset: PropTypes.number
+	messy: PropTypes.bool,
+	faceUp: PropTypes.bool,
+    messAngle: PropTypes.number,
+    stackLayerOffset: PropTypes.number,
+	stackLayerMaxOffset: PropTypes.number,
+	width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+	height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	aspectRatio: PropTypes.number
 };
 
 CardStack.defaultProps = {
-	mode: 'stack',
 	style: {},
-	rowSpacing: 10,
-	messAngle: 30,
-	stackLayerOffset: 1,
-	stackLayerMaxOffset: 10
+	messy: false,
+	faceUp: false,
+    messAngle: 15,
+    stackLayerOffset: 1,
+	stackLayerMaxOffset: 10,
+	width: DEFAULT_CARD_WIDTH,
+	aspectRatio: 0.7,
 };
 
+export { CardStackContext };
 export default CardStack;

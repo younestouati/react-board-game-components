@@ -25,13 +25,13 @@
     "@storybook/addon-knobs": "^3.3.6",
     "@storybook/addon-links": "^3.3.11",
     "@storybook/react": "^3.3.11",
-    "@younestouati/playing-cards-standard-deck": "2.0.0",
+    "@younestouati/playing-cards-standard-deck": "3.0.0",
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.6.0",
     "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.2.6",
@@ -41,7 +41,7 @@
     "@storybook/addons": "^3.3.11",
     "rollup-plugin-node-globals": "1.2.1",
     "rollup-plugin-postcss": "1.6.1",
-    "rollup-plugin-uglify": "4.0.0"
+    "rollup-plugin-uglify": "^3.0.0"
   },
   "peerDependencies": {
     "react": "*",
@@ -56,6 +56,5 @@
   },
   "files": [
     "dist"
-  ],
-  "dependencies": {}
+  ]
 }

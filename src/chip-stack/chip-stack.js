@@ -1,35 +1,60 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { DEFAULT_CHIP_DIAMETER } from '../chip/chip';
 import './chip-stack.css';
 
-class ChipStack extends Component {
-	render() {
-		const {children} = this.props;
-		const offset = children.length > 5 ? 1 : 2;
+const ChipStackContext = React.createContext({
+	isInStack: false,
+});
 
-		return (
-			<div className="item-stack" style={{width: '100px', height: '100px', display: 'inline-block', margin: '15px'}}>
-			{
-				React.Children.map(children, (child, i) => {
-					return (
-						<div className="stack-item" style={{left: (i*offset) + 'px', top: (i*offset) + 'px'}}>
-							{child}
-						</div>
-					);
-				})
-			}
-			</div>
-		);
-	}
+class ChipStack extends React.Component { 
+    render() {
+		const { children, stackLayerOffset, largeStackLayerOffset, style, diameter: rawDiameter } = this.props;
+
+		const chipCount = children ? children.length : 0;
+		const diameter = isNaN(rawDiameter) ? rawDiameter : `${rawDiameter}px`;
+		const offset = chipCount > 5 ? largeStackLayerOffset : stackLayerOffset;
+
+        return (
+			<ChipStackContext.Provider
+				value={{
+					isInStack: true,
+				}}
+			>
+				<div className="chip-stack" style={{...style, width: diameter, height: diameter }}>
+					{
+						React.Children.map(children, (child, i) => {
+							const stackItemStyle = {
+								'transform': `translate(${offset*i}px,${offset*i}px)`
+							};
+
+							return (
+								<div className="chip-stack-item" style={stackItemStyle}>
+									{child}
+								</div>
+							);
+						})
+					}
+				</div>
+			</ChipStackContext.Provider>
+        );
+    }
 }
 
-//TODO: VERIFY THAT THESE ARE CHIPS!
-//TODO: ALLOW STACK TO DETERMINE THE RADIUS OF THEM ALL
 ChipStack.propTypes = {
-	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+	style: PropTypes.object,
+    stackLayerOffset: PropTypes.number,
+	stackLayerMaxOffset: PropTypes.number,
+	diameter: PropTypes.number,
 };
 
 ChipStack.defaultProps = {
+	style: {},
+	diameter: DEFAULT_CHIP_DIAMETER,
+	stackLayerOffset: 2,
+	largeStackLayerOffset: 1, 
 };
 
+export { ChipStackContext };
 export default ChipStack;

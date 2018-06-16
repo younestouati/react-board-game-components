@@ -16,9 +16,11 @@ const defaultFrontFragment = (suit, rank, isJoker) => {
 const defaultBackFragment = () => 'back';
 
 const makeStandardDeck = (
-	svgStack,
+    svgStack,
+    frontStyle = {},
+    backStyle = {},
 	frontFragment = defaultFrontFragment,
-	backFragment = defaultBackFragment
+    backFragment = defaultBackFragment
 ) => {
 	const standardCard = (props) => {
 		return (
@@ -29,6 +31,14 @@ const makeStandardDeck = (
                 deck={svgStack}
                 frontFragment={frontFragment}
                 backFragment={backFragment}
+                frontStyle={{
+                    ...frontStyle,
+                    ...props.frontStyle,
+                }}
+                backStyle={{
+                    ...backStyle,
+                    ...props.backStyle,
+                }}
             />
         );
     }

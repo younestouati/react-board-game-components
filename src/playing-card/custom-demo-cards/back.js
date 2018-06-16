@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Custom2FrontNoText from '../assets/custom-card-4.png';
 
-class Back extends Component{
+class Back extends React.Component{
     render() {
         return (
             <div 

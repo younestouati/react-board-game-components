@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './board.css';
 
@@ -57,7 +57,7 @@ function forceZoomRectInsideBoard(zoomRect) {
 }
 
 
-class Board extends Component {
+class Board extends React.Component {
 	render() {
 		const {zoomRect, style, backgroundImage} = this.props;
 		const zr = forceZoomRectInsideBoard(preserveAspectRatio(completeZoomRect(zoomRect)));

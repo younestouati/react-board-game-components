@@ -1,7 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DEFAULT_CHIP_DIAMETER } from '../chip/chip';
-import './chip-stack.css';
+
+const defaultChipStackStyles = {
+	border: '2px dashed lightgray',
+    position: 'relative',
+    borderRadius: '100%',
+    boxSizing: 'border-box',
+    fontSize: '12px',
+};
+
+const defaultChipStackItemStyles = {
+    zIndex: 1,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: '100%',
+    height: '100%',
+};
 
 const ChipStackContext = React.createContext({
 	isInStack: false,
@@ -21,7 +37,14 @@ class ChipStack extends React.Component {
 					isInStack: true,
 				}}
 			>
-				<div className="chip-stack" style={{...style, width: diameter, height: diameter }}>
+				<div 
+					style={{
+						...defaultChipStackStyles,
+						...style,
+						width: diameter,
+						height: diameter
+					}}
+				>
 					{
 						React.Children.map(children, (child, i) => {
 							const stackItemStyle = {
@@ -29,7 +52,12 @@ class ChipStack extends React.Component {
 							};
 
 							return (
-								<div className="chip-stack-item" style={stackItemStyle}>
+								<div 
+									style={{
+										...defaultChipStackItemStyles,
+										...stackItemStyle
+									}}
+								>
 									{child}
 								</div>
 							);

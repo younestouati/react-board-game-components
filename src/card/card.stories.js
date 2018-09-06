@@ -4,7 +4,7 @@ import Deck from '@younestouati/playing-cards-standard-deck';
 
 import {storiesOf} from '@storybook/react';
 
-import PlayingCard from './playing-card';
+import Card from './card';
 import makeStandardDeck from './make-standard-deck';
 //https://www.fairway3games.com/free-poker-sized-card-templates/
 import Custom1Front from './assets/custom-card-2-with-text.png';
@@ -18,13 +18,9 @@ import CustomDemoCardBack from './custom-demo-cards/back';
 const containerStyle = {display: 'flex', flexWrap: 'wrap'};
 const wrapperStyle = {margin: '0 10px 10px 0'};
 
-const StandardDeck = makeStandardDeck(
-  Deck,
-  {}, 
-  {backgroundSize: '7px 10px', backgroundClip: 'content-box', padding: '5%', backgroundRepeat: 'repeat'}
-);
+const StandardDeck = makeStandardDeck(Deck);
 
-storiesOf('PlayingCard', module)
+storiesOf('Card', module)
   .add('Standard Cards', () => {
     const suits = ['hearts', 'clubs', 'spades', 'diamonds'];
 
@@ -57,7 +53,7 @@ storiesOf('PlayingCard', module)
     return (
       <div style={containerStyle}>
         <div style={wrapperStyle}>
-          <PlayingCard
+          <Card
             front={Custom1Front}
             back={Custom1Back}
             faceUp={boolean('faceUp', true)}
@@ -67,7 +63,7 @@ storiesOf('PlayingCard', module)
           />
         </div>
         <div style={wrapperStyle}>
-          <PlayingCard
+          <Card
             front={Custom2Front}
             back={Custom2Back}
             faceUp={boolean('faceUp', true)}
@@ -84,7 +80,7 @@ storiesOf('PlayingCard', module)
     return (
       <div style={containerStyle}>
         <div style={wrapperStyle}>
-          <PlayingCard
+          <Card
             front={<CustomDemoCardFront/>}
             back={<CustomDemoCardBack/>}
             faceUp={boolean('faceUp', true)}
@@ -120,7 +116,7 @@ storiesOf('PlayingCard', module)
         rank={select('rank', ranks)}
         isJoker={boolean('isJoker', false)}
         faceUp={boolean('faceUp', true)}
-        rotation={number('rotation', 0, {min: -360, max: 360, step: 1, range: true})}
+        rotateY={number('rotateY', 0, {min: -360, max: 360, step: 1, range: true})}
         animateRotation={boolean('animateRotation', true)}
         shadow={boolean('shadow', true)}
         border={boolean('border', true)}
@@ -132,11 +128,11 @@ storiesOf('PlayingCard', module)
     )
     }).add('Playground (Custom Cards)', () => {  
       return (
-        <PlayingCard
+        <Card
           front={text('front', 'https://i.imgur.com/r5ZuuBn.jpg')}
           back={text('back', 'https://i.imgur.com/YtkhlRj.jpg')}
           faceUp={boolean('faceUp', true)}
-          rotation={number('rotation', 0, {min: -360, max: 360, step: 1, range: true})}
+          rotateY={number('rotateY', 0, {min: -360, max: 360, step: 1, range: true})}
           animateRotation={boolean('animateRotation', true)}
           shadow={boolean('shadow', true)}
           border={boolean('border', true)}

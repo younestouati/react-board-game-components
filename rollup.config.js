@@ -4,7 +4,6 @@ import postcss from 'rollup-plugin-postcss';
 import uglify from 'rollup-plugin-uglify';
 import eslint from 'rollup-plugin-eslint';
 import babel from 'rollup-plugin-babel';
-import image from 'rollup-plugin-image';
 import globals from 'rollup-plugin-node-globals';
 import pkg from './package.json';
 
@@ -38,10 +37,9 @@ export default [
 				plugins: ['external-helpers']
 			}),
 			resolve(), // Makes it possible to load third-party modules in node_modules.
-			commonjs(), // Converts CommonJS modules to ES6.
-			image(), // For importing JPG, PNG, GIF and SVG images
+            commonjs(), // Converts CommonJS modules to ES6.
 			globals(), // Injects the same node globals browserify does (i.e process, Buffer, etc)    
-			isProduction && uglify()
+			//isProduction && uglify()
         ],
         sourcemap: true
     }

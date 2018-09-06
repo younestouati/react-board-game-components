@@ -1,2 +1,2478 @@
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports,require("react")):"function"==typeof define&&define.amd?define(["exports","react"],t):t(e.ReactBoardGameComponents={},e.React)}(this,function(e,t){"use strict";t=t&&t.hasOwnProperty("default")?t.default:t;var r="undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{};function n(){throw new Error("setTimeout has not been defined")}function o(){throw new Error("clearTimeout has not been defined")}var i=n,a=o;function l(e){if(i===setTimeout)return setTimeout(e,0);if((i===n||!i)&&setTimeout)return i=setTimeout,setTimeout(e,0);try{return i(e,0)}catch(t){try{return i.call(null,e,0)}catch(t){return i.call(this,e,0)}}}"function"==typeof r.setTimeout&&(i=setTimeout),"function"==typeof r.clearTimeout&&(a=clearTimeout);var s,c=[],u=!1,f=-1;function p(){u&&s&&(u=!1,s.length?c=s.concat(c):f=-1,c.length&&d())}function d(){if(!u){var e=l(p);u=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s&&s[f].run();f=-1,t=c.length}s=null,u=!1,function(e){if(a===clearTimeout)return clearTimeout(e);if((a===o||!a)&&clearTimeout)return a=clearTimeout,clearTimeout(e);try{a(e)}catch(t){try{return a.call(null,e)}catch(t){return a.call(this,e)}}}(e)}}function h(e,t){this.fun=e,this.array=t}h.prototype.run=function(){this.fun.apply(null,this.array)};function y(){}var b=y,m=y,v=y,g=y,w=y,k=y,x=y;var O=r.performance||{},E=O.now||O.mozNow||O.msNow||O.oNow||O.webkitNow||function(){return(new Date).getTime()};var T=new Date;var S={nextTick:function(e){var t=new Array(arguments.length-1);if(arguments.length>1)for(var r=1;r<arguments.length;r++)t[r-1]=arguments[r];c.push(new h(e,t)),1!==c.length||u||l(d)},title:"browser",browser:!0,env:{},argv:[],version:"",versions:{},on:b,addListener:m,once:v,off:g,removeListener:w,removeAllListeners:k,emit:x,binding:function(e){throw new Error("process.binding is not supported")},cwd:function(){return"/"},chdir:function(e){throw new Error("process.chdir is not supported")},umask:function(){return 0},hrtime:function(e){var t=.001*E.call(O),r=Math.floor(t),n=Math.floor(t%1*1e9);return e&&(r-=e[0],(n-=e[1])<0&&(r--,n+=1e9)),[r,n]},platform:"browser",release:{},config:{},uptime:function(){return(new Date-T)/1e3}};function j(e){return function(){return e}}var R=function(){};R.thatReturns=j,R.thatReturnsFalse=j(!1),R.thatReturnsTrue=j(!0),R.thatReturnsNull=j(null),R.thatReturnsThis=function(){return this},R.thatReturnsArgument=function(e){return e};var P=R,N=function(e){};"production"!==S.env.NODE_ENV&&(N=function(e){if(void 0===e)throw new Error("invariant requires an error message argument")});var C=function(e,t,r,n,o,i,a,l){if(N(t),!e){var s;if(void 0===t)s=new Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{var c=[r,n,o,i,a,l],u=0;(s=new Error(t.replace(/%s/g,function(){return c[u++]}))).name="Invariant Violation"}throw s.framesToPop=1,s}},I=P;if("production"!==S.env.NODE_ENV){I=function(e,t){if(void 0===t)throw new Error("`warning(condition, format, ...args)` requires a warning message argument");if(0!==t.indexOf("Failed Composite propType: ")&&!e){for(var r=arguments.length,n=Array(r>2?r-2:0),o=2;o<r;o++)n[o-2]=arguments[o];(function(e){for(var t=arguments.length,r=Array(t>1?t-1:0),n=1;n<t;n++)r[n-1]=arguments[n];var o=0,i="Warning: "+e.replace(/%s/g,function(){return r[o++]});"undefined"!=typeof console&&console.error(i);try{throw new Error(i)}catch(e){}}).apply(void 0,[t].concat(n))}}}var _=I,A=Object.getOwnPropertySymbols,M=Object.prototype.hasOwnProperty,q=Object.prototype.propertyIsEnumerable;var D=function(){try{if(!Object.assign)return!1;var e=new String("abc");if(e[5]="de","5"===Object.getOwnPropertyNames(e)[0])return!1;for(var t={},r=0;r<10;r++)t["_"+String.fromCharCode(r)]=r;if("0123456789"!==Object.getOwnPropertyNames(t).map(function(e){return t[e]}).join(""))return!1;var n={};return"abcdefghijklmnopqrst".split("").forEach(function(e){n[e]=e}),"abcdefghijklmnopqrst"===Object.keys(Object.assign({},n)).join("")}catch(e){return!1}}()?Object.assign:function(e,t){for(var r,n,o=function(e){if(null===e||void 0===e)throw new TypeError("Object.assign cannot be called with null or undefined");return Object(e)}(e),i=1;i<arguments.length;i++){for(var a in r=Object(arguments[i]))M.call(r,a)&&(o[a]=r[a]);if(A){n=A(r);for(var l=0;l<n.length;l++)q.call(r,n[l])&&(o[n[l]]=r[n[l]])}}return o},L="SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";if("production"!==S.env.NODE_ENV)var F=C,V=_,U=L,W={};var z,B=function(e,t,r,n,o){if("production"!==S.env.NODE_ENV)for(var i in e)if(e.hasOwnProperty(i)){var a;try{F("function"==typeof e[i],"%s: %s type `%s` is invalid; it must be a function, usually from the `prop-types` package, but received `%s`.",n||"React class",r,i,typeof e[i]),a=e[i](t,i,n,r,null,U)}catch(e){a=e}if(V(!a||a instanceof Error,"%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).",n||"React class",r,i,typeof a),a instanceof Error&&!(a.message in W)){W[a.message]=!0;var l=o?o():"";V(!1,"Failed %s type: %s%s",r,a.message,null!=l?l:"")}}},Y=function(e,t){var r="function"==typeof Symbol&&Symbol.iterator,n="@@iterator";var o="<<anonymous>>",i={array:c("array"),bool:c("boolean"),func:c("function"),number:c("number"),object:c("object"),string:c("string"),symbol:c("symbol"),any:s(P.thatReturnsNull),arrayOf:function(e){return s(function(t,r,n,o,i){if("function"!=typeof e)return new l("Property `"+i+"` of component `"+n+"` has invalid PropType notation inside arrayOf.");var a=t[r];if(!Array.isArray(a)){var s=f(a);return new l("Invalid "+o+" `"+i+"` of type `"+s+"` supplied to `"+n+"`, expected an array.")}for(var c=0;c<a.length;c++){var u=e(a,c,n,o,i+"["+c+"]",L);if(u instanceof Error)return u}return null})},element:function(){return s(function(t,r,n,o,i){var a=t[r];if(!e(a)){var s=f(a);return new l("Invalid "+o+" `"+i+"` of type `"+s+"` supplied to `"+n+"`, expected a single ReactElement.")}return null})}(),instanceOf:function(e){return s(function(t,r,n,i,a){if(!(t[r]instanceof e)){var s=e.name||o,c=function(e){if(!e.constructor||!e.constructor.name)return o;return e.constructor.name}(t[r]);return new l("Invalid "+i+" `"+a+"` of type `"+c+"` supplied to `"+n+"`, expected instance of `"+s+"`.")}return null})},node:function(){return s(function(e,t,r,n,o){if(!u(e[t]))return new l("Invalid "+n+" `"+o+"` supplied to `"+r+"`, expected a ReactNode.");return null})}(),objectOf:function(e){return s(function(t,r,n,o,i){if("function"!=typeof e)return new l("Property `"+i+"` of component `"+n+"` has invalid PropType notation inside objectOf.");var a=t[r],s=f(a);if("object"!==s)return new l("Invalid "+o+" `"+i+"` of type `"+s+"` supplied to `"+n+"`, expected an object.");for(var c in a)if(a.hasOwnProperty(c)){var u=e(a,c,n,o,i+"."+c,L);if(u instanceof Error)return u}return null})},oneOf:function(e){if(!Array.isArray(e))return"production"!==S.env.NODE_ENV&&_(!1,"Invalid argument supplied to oneOf, expected an instance of array."),P.thatReturnsNull;return s(function(t,r,n,o,i){for(var s=t[r],c=0;c<e.length;c++)if(a(s,e[c]))return null;var u=JSON.stringify(e);return new l("Invalid "+o+" `"+i+"` of value `"+s+"` supplied to `"+n+"`, expected one of "+u+".")})},oneOfType:function(e){if(!Array.isArray(e))return"production"!==S.env.NODE_ENV&&_(!1,"Invalid argument supplied to oneOfType, expected an instance of array."),P.thatReturnsNull;for(var t=0;t<e.length;t++){var r=e[t];if("function"!=typeof r)return _(!1,"Invalid argument supplied to oneOfType. Expected an array of check functions, but received %s at index %s.",d(r),t),P.thatReturnsNull}return s(function(t,r,n,o,i){for(var a=0;a<e.length;a++){var s=e[a];if(null==s(t,r,n,o,i,L))return null}return new l("Invalid "+o+" `"+i+"` supplied to `"+n+"`.")})},shape:function(e){return s(function(t,r,n,o,i){var a=t[r],s=f(a);if("object"!==s)return new l("Invalid "+o+" `"+i+"` of type `"+s+"` supplied to `"+n+"`, expected `object`.");for(var c in e){var u=e[c];if(u){var p=u(a,c,n,o,i+"."+c,L);if(p)return p}}return null})},exact:function(e){return s(function(t,r,n,o,i){var a=t[r],s=f(a);if("object"!==s)return new l("Invalid "+o+" `"+i+"` of type `"+s+"` supplied to `"+n+"`, expected `object`.");var c=D({},t[r],e);for(var u in c){var p=e[u];if(!p)return new l("Invalid "+o+" `"+i+"` key `"+u+"` supplied to `"+n+"`.\nBad object: "+JSON.stringify(t[r],null,"  ")+"\nValid keys: "+JSON.stringify(Object.keys(e),null,"  "));var d=p(a,u,n,o,i+"."+u,L);if(d)return d}return null})}};function a(e,t){return e===t?0!==e||1/e==1/t:e!=e&&t!=t}function l(e){this.message=e,this.stack=""}function s(e){if("production"!==S.env.NODE_ENV)var r={},n=0;function i(i,a,s,c,u,f,p){if(c=c||o,f=f||s,p!==L)if(t)C(!1,"Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types");else if("production"!==S.env.NODE_ENV&&"undefined"!=typeof console){var d=c+":"+s;!r[d]&&n<3&&(_(!1,"You are manually calling a React.PropTypes validation function for the `%s` prop on `%s`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details.",f,c),r[d]=!0,n++)}return null==a[s]?i?null===a[s]?new l("The "+u+" `"+f+"` is marked as required in `"+c+"`, but its value is `null`."):new l("The "+u+" `"+f+"` is marked as required in `"+c+"`, but its value is `undefined`."):null:e(a,s,c,u,f)}var a=i.bind(null,!1);return a.isRequired=i.bind(null,!0),a}function c(e){return s(function(t,r,n,o,i,a){var s=t[r];return f(s)!==e?new l("Invalid "+o+" `"+i+"` of type `"+p(s)+"` supplied to `"+n+"`, expected `"+e+"`."):null})}function u(t){switch(typeof t){case"number":case"string":case"undefined":return!0;case"boolean":return!t;case"object":if(Array.isArray(t))return t.every(u);if(null===t||e(t))return!0;var o=function(e){var t=e&&(r&&e[r]||e[n]);if("function"==typeof t)return t}(t);if(!o)return!1;var i,a=o.call(t);if(o!==t.entries){for(;!(i=a.next()).done;)if(!u(i.value))return!1}else for(;!(i=a.next()).done;){var l=i.value;if(l&&!u(l[1]))return!1}return!0;default:return!1}}function f(e){var t=typeof e;return Array.isArray(e)?"array":e instanceof RegExp?"object":function(e,t){return"symbol"===e||"Symbol"===t["@@toStringTag"]||"function"==typeof Symbol&&t instanceof Symbol}(t,e)?"symbol":t}function p(e){if(void 0===e||null===e)return""+e;var t=f(e);if("object"===t){if(e instanceof Date)return"date";if(e instanceof RegExp)return"regexp"}return t}function d(e){var t=p(e);switch(t){case"array":case"object":return"an "+t;case"boolean":case"date":case"regexp":return"a "+t;default:return t}}return l.prototype=Error.prototype,i.checkPropTypes=B,i.PropTypes=i,i},J=(function(e){if("production"!==S.env.NODE_ENV){var t="function"==typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103;e.exports=Y(function(e){return"object"==typeof e&&null!==e&&e.$$typeof===t},!0)}else e.exports=function(){function e(e,t,r,n,o,i){i!==L&&C(!1,"Calling PropTypes validators directly is not supported by the `prop-types` package. Use PropTypes.checkPropTypes() to call them. Read more at http://fb.me/use-check-prop-types")}function t(){return e}e.isRequired=e;var r={array:e,bool:e,func:e,number:e,object:e,string:e,symbol:e,any:e,arrayOf:t,element:e,instanceOf:t,node:e,objectOf:t,oneOf:t,oneOfType:t,shape:t,exact:t};return r.checkPropTypes=P,r.PropTypes=r,r}()}(z={exports:{}},z.exports),z.exports),G={1:{color:"#dddddd",textColor:"#cccccc"},2:{color:"gold"},5:{color:"#800000"},10:{color:"#000099",textColor:"#00016C"},20:{color:"#cccccc"},25:{color:"#008000"},50:{color:"orange"},100:{color:"#222222",textColor:"#000000"},250:{color:"pink"},500:{color:"purple"},1000:{color:"#800020"},2000:{color:"lightblue"},5000:{color:"brown"}};function H(e,t){void 0===t&&(t={});var r=t.insertAt;if(e&&"undefined"!=typeof document){var n=document.head||document.getElementsByTagName("head")[0],o=document.createElement("style");o.type="text/css","top"===r&&n.firstChild?n.insertBefore(o,n.firstChild):n.appendChild(o),o.styleSheet?o.styleSheet.cssText=e:o.appendChild(document.createTextNode(e))}}H(".chip-stack {\n    border: 2px dashed lightgray;\n    position: relative;\n    border-radius: 100%;\n    box-sizing: border-box;\n    font-size: 12px;\n}\n    \n.chip-stack > * {\n    margin: -2px 0 0 -2px; /* Top and left margin should match border width (just minus instead) */\n}\n    \n.chip-stack-item {\n    z-index: 1;\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 100%;\n    height: 100%;\n}");var $="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},K=(function(){function e(e){this.value=e}function t(t){var r,n;function o(r,n){try{var a=t[r](n),l=a.value;l instanceof e?Promise.resolve(l.value).then(function(e){o("next",e)},function(e){o("throw",e)}):i(a.done?"return":"normal",a.value)}catch(e){i("throw",e)}}function i(e,t){switch(e){case"return":r.resolve({value:t,done:!0});break;case"throw":r.reject(t);break;default:r.resolve({value:t,done:!1})}(r=r.next)?o(r.key,r.arg):n=null}this._invoke=function(e,t){return new Promise(function(i,a){var l={key:e,arg:t,resolve:i,reject:a,next:null};n?n=n.next=l:(r=n=l,o(e,t))})},"function"!=typeof t.return&&(this.return=void 0)}"function"==typeof Symbol&&Symbol.asyncIterator&&(t.prototype[Symbol.asyncIterator]=function(){return this}),t.prototype.next=function(e){return this._invoke("next",e)},t.prototype.throw=function(e){return this._invoke("throw",e)},t.prototype.return=function(e){return this._invoke("return",e)}}(),function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}),Q=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),X=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e},Z=function(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)},ee=function(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t},te=t.createContext({isInStack:!1}),re=function(e){function r(){return K(this,r),ee(this,(r.__proto__||Object.getPrototypeOf(r)).apply(this,arguments))}return Z(r,e),Q(r,[{key:"render",value:function(){var e=this.props,r=e.children,n=e.stackLayerOffset,o=e.largeStackLayerOffset,i=e.style,a=e.diameter,l=r?r.length:0,s=isNaN(a)?a:a+"px",c=l>5?o:n;return t.createElement(te.Provider,{value:{isInStack:!0}},t.createElement("div",{className:"chip-stack",style:X({},i,{width:s,height:s})},t.Children.map(r,function(e,r){var n={transform:"translate("+c*r+"px,"+c*r+"px)"};return t.createElement("div",{className:"chip-stack-item",style:n},e)})))}}]),r}(t.Component);re.propTypes={children:J.oneOfType([J.arrayOf(J.node),J.node]),style:J.object,stackLayerOffset:J.number,stackLayerMaxOffset:J.number,diameter:J.number},re.defaultProps={style:{},diameter:ie,stackLayerOffset:2,largeStackLayerOffset:1};var ne=function(e){return void 0===e||null===e},oe=function(){for(var e=arguments.length,t=Array(e),r=0;r<e;r++)t[r]=arguments[r];var n=void 0;return t.some(function(e){return!ne(e)&&(n=e,!0)}),n},ie=120,ae=function(e){var r=e.value,n=e.diameter,o=e.shadow,i=e.color,a=e.textColor,l=void 0,s=void 0;if(G.hasOwnProperty(r+"")){var c=G[r+""],u=c.color,f=c.textColor;l=i||u,s=!f||i||a?a||l:f}else l=i||"grey",s=a||l;var p=l===s?"url(#darken)":"none",d="boolean"==typeof o?o?{boxShadow:"0 0 5px 1px rgba(0, 0, 0, 0.5), 0 0 3px 0 rgba(0, 0, 0, 0.4) inset"}:{}:{boxShadow:o};return t.createElement(te.Consumer,null,function(e){var o=e.isInStack?"100%":oe(n,ie);return t.createElement("svg",{viewBox:"0 0 200 200",style:X({borderRadius:"50%",width:isNaN(o)?o:o+"px",height:isNaN(o)?o:o+"px"},d),xmlns:"http://www.w3.org/2000/svg"},t.createElement("defs",null,t.createElement("filter",{id:"darken"},t.createElement("feComponentTransfer",null,t.createElement("feFuncR",{type:"linear",slope:"1",intercept:"-.05"}),t.createElement("feFuncG",{type:"linear",slope:"1",intercept:"-.05"}),t.createElement("feFuncB",{type:"linear",slope:"1",intercept:"-.05"})))),t.createElement("circle",{cx:"100",cy:"100",r:"100",style:{fill:l}}),t.createElement("circle",{cx:"100",cy:"100",r:"92",style:{fill:"none",strokeDasharray:"25.8 70.4",strokeDashoffset:"12px",stroke:"white",strokeWidth:"17px"}}),t.createElement("circle",{filter:p,cx:"100",cy:"100",r:"70",style:{fill:"none",stroke:s,strokeWidth:"3px"}}),t.createElement("circle",{cx:"100",cy:"100",r:"70",style:{fill:"none",strokeDasharray:"18.6 18",strokeDashoffset:"9px",stroke:"white",strokeWidth:"3px"}}),t.createElement("text",{x:"100",y:"100",filter:p,fill:s,textAnchor:"middle",alignmentBaseline:"central",style:{fontFamily:"arial",fontSize:"60px",fontWeight:"bold",textShadow:"-1px -1px 0px rgba(0, 0, 0, 0.3), 1px 1px 0px rgba(255, 255, 255, 0.2)"}},r))})};ae.propTypes={value:J.number.isRequired,diameter:J.number,color:J.string,textColor:J.string,shadow:J.bool},ae.defaultProps={shadow:!0};var le=0,se=function(e){return Number(e.toFixed(3))};function ce(e,t,r){for(var n=[],o=t/Math.sin(Math.PI/3),i=2*Math.PI/r,a=0;a<r;a++){var l=Math.PI/2+a*i;n.push([e+Math.cos(l)*(e-o/2),e-Math.sin(l)*(e-o/2)])}return n.map(function(e){return e.map(se)})}function ue(e,t,r){return ce(e,t,r).map(function(t){return n=[e,e],o=t,i=Math.PI/r,[Math.cos(i)*(o[0]-n[0])+Math.sin(i)*(o[1]-n[1])+n[0],Math.cos(i)*(o[1]-n[1])-Math.sin(i)*(o[0]-n[0])+n[1]];var n,o,i})}function fe(e){var r=e.backgroundImage,n=e.bevel,o=e.radius,i=e.flatTop,a=e.borderWidth,l=e.borderColor,s=e.backgroundColor,c=e.children,u=e.shadow,f=e.n,p=le++,d=r&&"bg-"+p,h={fill:r?"url(#"+d+")":s,stroke:l,strokeWidth:a},y=(i?ue(o,a,f):ce(o,a,f)).map(function(e){return e.join(",")}).join(" "),b=n?"url(#bevel)":"none",m="boolean"==typeof u?u?{filter:"drop-shadow(1px 1px 2px rgba(82,81,82,1))"}:{}:{shadow:u},v={height:2*(i?o/(Math.sqrt(3)/2):o),width:2*(i?o:o/(Math.sqrt(3)/2))};return t.createElement("svg",{viewBox:"0 0 "+2*o+" "+2*o,style:X({width:2*o+"px",height:2*o+"px",position:"relative"},m)},t.createElement("defs",null,t.createElement("filter",{id:"bevel",filterUnits:"objectBoundingBox",x:"-10%",y:"-10%",width:"150%",height:"150%"},t.createElement("feGaussianBlur",{in:"SourceAlpha",stdDeviation:"1.5",result:"blur"}),t.createElement("feSpecularLighting",{in:"blur",surfaceScale:"5",specularConstant:"0.5",specularExponent:"30",result:"specOut",lightingColor:"lightgrey"},t.createElement("fePointLight",{x:"-5000",y:"-5000",z:"8000"})),t.createElement("feComposite",{in:"specOut",in2:"SourceAlpha",operator:"in",result:"specOut2"}),t.createElement("feComposite",{in:"SourceGraphic",in2:"specOut2",operator:"arithmetic",k1:"0",k2:"1",k3:"1",k4:"0",result:"litPaint"})),t.createElement("clipPath",{id:"tileClip"+p},t.createElement("polygon",{points:y})),t.createElement("pattern",{id:d,width:v.width,height:v.height,patternUnits:"userSpaceOnUse"},t.createElement("image",{width:v.width,height:v.height,xlinkHref:r,preserveAspectRatio:"xMidYMid slice"}))),t.createElement("polygon",{style:h,filter:b,points:y}),t.createElement("foreignObject",{x:"0",y:"0",width:"100%",height:"100%",clipPath:"url(#tileClip"+p+")"},t.createElement("div",{style:{width:2*o+"px",height:2*o+"px",position:"relative",WebkitClipPath:"url(#tileClip"+p+")",clipPath:"url(#tileClip"+p+")"}},c)))}fe.propTypes={n:J.number.isRequired,flatTop:J.bool,shadow:J.oneOfType([J.bool,J.string]),borderWidth:J.number,borderColor:J.string,backgroundColor:J.string,backgroundImage:J.string,children:J.node,bevel:J.bool},fe.defaultProps={flatTop:!1,shadow:!1,borderWidth:0,borderColor:"#efefef",backgroundColor:"white",bevel:!1};var pe=function(e){return t.createElement(fe,X({n:6},e))};pe.propTypes={flatTop:J.bool,shadow:J.oneOfType([J.bool,J.string]),borderWidth:J.number,borderColor:J.string,backgroundColor:J.string,backgroundImage:J.string,children:J.node,bevel:J.bool};var de=function(e){return t.createElement(fe,X({n:4},e,{flatTop:!0}))};de.propTypes={shadow:J.oneOfType([J.bool,J.string]),borderWidth:J.number,borderColor:J.string,backgroundColor:J.string,backgroundImage:J.string,children:J.node,bevel:J.bool};var he={width:"100%",height:"100%",display:"inline-block",perspective:"1000px"},ye={backfaceVisibility:"hidden",zIndex:2,transform:"rotateY(0deg)",width:"100%",height:"100%",position:"absolute",left:0,top:0},be={backfaceVisibility:"hidden",transform:"rotateY(180deg)",width:"100%",height:"100%",position:"absolute",left:0,top:0},me=function(e){var r=e.animateRotation,n=e.isFlipped,o=e.rotation,i=e.children;return t.createElement("div",{style:X({},he)},t.createElement("div",{style:{transition:r?"0.6s":"none",transform:"rotateY("+((n?180:0)+o)+"deg",transformStyle:"preserve-3d",position:"relative",width:"100%",height:"100%"}},t.createElement("div",{style:ye},i[0]),t.createElement("div",{style:be},i[1])))};me.propTypes={isFlipped:J.bool,rotation:J.number,animateRotation:J.bool,children:J.node.isRequired},me.defaultProps={isFlipped:!1,rotation:0,animateRotation:!0};H(".card-stack {\n    border: 2px dashed lightgray;\n    position: relative;\n    border-radius: 6px;\n    box-sizing: border-box;\n    font-size: 12px;\n}\n    \n.card-stack > * {\n    margin: -2px 0 0 -2px; /* Top and left margin should match border width (just minus instead) */\n}\n    \n.card-stack-item {\n    z-index: 1;\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 100%;\n    height: 100%;\n}");var ve=[.14,.27,.08,.4,.97,.73,.33,.02,.58,.91],ge=t.createContext({isInStack:!1}),we=function(e){function r(){return K(this,r),ee(this,(r.__proto__||Object.getPrototypeOf(r)).apply(this,arguments))}return Z(r,e),Q(r,[{key:"render",value:function(){var e=this.props,r=e.children,n=e.messy,o=e.faceUp,i=e.messAngle,a=e.stackLayerOffset,l=e.stackLayerMaxOffset,s=e.style,c=!ne(this.props.height)&&0!==this.props.height,u=isNaN(this.props.width)?this.props.width:this.props.width+"px",f=void 0,p=0;return c?f=this.props.height:p=100/this.props.aspectRatio+"%",t.createElement(ge.Provider,{value:{isInStack:!0,faceUpStack:o}},t.createElement("div",{className:"card-stack",style:X({},s,{width:u,height:f,position:"relative",display:"inline-block"})},t.createElement("div",{style:{float:"left",paddingTop:p}}),t.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0}},t.Children.map(r,function(e,r){var o=n?{transform:"rotate("+(ve[r%ve.length]*i-i/2)+"deg)"}:{transform:"translate("+Math.min(r*a,l)+"px,"+Math.min(r*a,l)+"px)"};return t.createElement("div",{className:"card-stack-item",style:o},e)}))))}}]),r}(t.Component);we.propTypes={children:J.oneOfType([J.arrayOf(J.node),J.node]),style:J.object,messy:J.bool,faceUp:J.bool,messAngle:J.number,stackLayerOffset:J.number,stackLayerMaxOffset:J.number,width:J.oneOfType([J.number,J.string]).isRequired,height:J.oneOfType([J.number,J.string]),aspectRatio:J.number},we.defaultProps={style:{},messy:!1,faceUp:!1,messAngle:15,stackLayerOffset:1,stackLayerMaxOffset:10,width:xe,aspectRatio:.7};var ke=function(e){return"boolean"==typeof e},xe=210,Oe={backgroundPosition:"center center",backgroundRepeat:"no-repeat",backgroundSize:"cover",backgroundColor:"white",display:"inline-block",boxSizing:"border-box",position:"absolute",overflow:"hidden",top:0,left:0,right:0,bottom:0},Ee=function(e){var r=e.frontStyle,n=e.backStyle,o=e.borderRadius,i=e.animateRotation,a=e.front,l=e.back,s=e.shadow,c=e.border,u=e.rotation,f=ke(s)?s?{boxShadow:"1px 1px 2px 0px rgba(82,81,82,1)"}:{}:{boxShadow:s},p=ke(c)?c?{border:"1px solid #efefef"}:{}:{border:c},d=ke(o)?o?{borderRadius:"6px"}:{}:{borderRadius:o},h=X({},f,p,d,Oe),y=function(e,o){return"object"===(void 0===(i=e)?"undefined":$(i))?t.createElement("div",{style:X({},h,o?n:r)},e):t.createElement("div",{style:X({backgroundImage:"url("+e+")"},h,o?n:r)});var i};return t.createElement(ge.Consumer,null,function(r){var n=r.isInStack,o=r.faceUpStack,s=n?"100%":xe,c=n?"100%":300,f=!ne(e.width),p=!ne(e.height)&&0!==e.height,d=!ne(e.aspectRatio),h=f?e.width:s,b=void 0,m=0;p||f&&d?p?b=e.height:m=100/e.aspectRatio+"%":b=c;var v=oe(e.faceUp,!!n&&o);return t.createElement("div",{style:{background:"white",width:isNaN(h)?h:h+"px",height:isNaN(b)?b:b+"px",position:"relative",display:"inline-block"}},t.createElement("div",{style:{float:"left",paddingTop:m}}),t.createElement("div",{style:{position:"absolute",top:0,left:0,right:0,bottom:0}},t.createElement(me,{isFlipped:!v,rotation:u,animateRotation:i},y(a),y(l,!0))))})};Ee.propTypes={front:J.oneOfType([J.string,J.node]),back:J.oneOfType([J.string,J.node]),faceUp:J.bool,rotation:J.number,shadow:J.oneOfType([J.string,J.bool]),border:J.oneOfType([J.string,J.bool]),borderRadius:J.oneOfType([J.string,J.bool]),animateRotation:J.bool,width:J.number,height:J.number,aspectRatio:J.number,frontStyle:J.object,backStyle:J.object},Ee.defaultProps={animateRotation:!0,borderRadius:!0,border:!0,shadow:!0,rotation:0,frontStyle:{},backStyle:{}};var Te=function(e,t){return function(r,n,o){var i=r[n],a=void 0===i?"undefined":$(i),l="string"===a?i.toLowerCase():i;return"undefined"===a?function(e,t,r){return e?new Error("Missing required property "+t+" in "+r):null}(t,n,o):e.indexOf(l)>-1?null:new Error(n+" in "+o+" must be one of the Values: "+e.join(", "))}},Se=[1,2,3,4,5,6,7,8,9,10,11,12,13,"king","queen","jack","ace","joker"],je=["hearts","spades","clubs","diamonds"],Re=Te(Se,!1);Re.isRequired=Te(Se,!0);var Pe=Te(je,!1);Pe.isRequired=Te(je,!0);var Ne={rank:Re,suit:Pe},Ce=function(e,t,r){var n="string"==typeof t?t.toLowerCase():t;return n="king"===(n="queen"===(n="jack"===(n="ace"===n?1:n)?11:n)?12:n)?13:n,r?"joker":n+e.charAt(0)},Ie=function(){return"back"};e.Chip=ae,e.HexTile=pe,e.SquareTile=de,e.PlayingCard=Ee,e.makeStandardDeck=function(e){var r=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{},o=arguments.length>3&&void 0!==arguments[3]?arguments[3]:Ce,i=arguments.length>4&&void 0!==arguments[4]?arguments[4]:Ie,a=function(a){return t.createElement(Ee,X({},a,{front:e+"#"+o(a.suit,a.rank,a.isJoker),back:e+"#"+i(),deck:e,frontFragment:o,backFragment:i,frontStyle:X({},r,a.frontStyle),backStyle:X({},n,a.backStyle)}))};return a.propTypes={rank:Ne.rank.isRequired,suit:Ne.suit.isRequired,isJoker:J.bool},a.defaultProps={rank:1,suit:"hearts",back:"back",isJoker:!1},a},Object.defineProperty(e,"__esModule",{value:!0})});
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'react'], factory) :
+	(factory((global.ReactBoardGameComponents = {}),global.React));
+}(this, (function (exports,React) { 'use strict';
+
+React = React && React.hasOwnProperty('default') ? React['default'] : React;
+
+var global$1 = (typeof global !== "undefined" ? global :
+            typeof self !== "undefined" ? self :
+            typeof window !== "undefined" ? window : {});
+
+// shim for using process in browser
+// based off https://github.com/defunctzombie/node-process/blob/master/browser.js
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+var cachedSetTimeout = defaultSetTimout;
+var cachedClearTimeout = defaultClearTimeout;
+if (typeof global$1.setTimeout === 'function') {
+    cachedSetTimeout = setTimeout;
+}
+if (typeof global$1.clearTimeout === 'function') {
+    cachedClearTimeout = clearTimeout;
+}
+
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+function nextTick(fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+}
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+var title = 'browser';
+var platform = 'browser';
+var browser = true;
+var env = {};
+var argv = [];
+var version = ''; // empty string to avoid regexp issues
+var versions = {};
+var release = {};
+var config = {};
+
+function noop() {}
+
+var on = noop;
+var addListener = noop;
+var once = noop;
+var off = noop;
+var removeListener = noop;
+var removeAllListeners = noop;
+var emit = noop;
+
+function binding(name) {
+    throw new Error('process.binding is not supported');
+}
+
+function cwd () { return '/' }
+function chdir (dir) {
+    throw new Error('process.chdir is not supported');
+}
+function umask() { return 0; }
+
+// from https://github.com/kumavis/browser-process-hrtime/blob/master/index.js
+var performance = global$1.performance || {};
+var performanceNow =
+  performance.now        ||
+  performance.mozNow     ||
+  performance.msNow      ||
+  performance.oNow       ||
+  performance.webkitNow  ||
+  function(){ return (new Date()).getTime() };
+
+// generate timestamp or delta
+// see http://nodejs.org/api/process.html#process_process_hrtime
+function hrtime(previousTimestamp){
+  var clocktime = performanceNow.call(performance)*1e-3;
+  var seconds = Math.floor(clocktime);
+  var nanoseconds = Math.floor((clocktime%1)*1e9);
+  if (previousTimestamp) {
+    seconds = seconds - previousTimestamp[0];
+    nanoseconds = nanoseconds - previousTimestamp[1];
+    if (nanoseconds<0) {
+      seconds--;
+      nanoseconds += 1e9;
+    }
+  }
+  return [seconds,nanoseconds]
+}
+
+var startTime = new Date();
+function uptime() {
+  var currentTime = new Date();
+  var dif = currentTime - startTime;
+  return dif / 1000;
+}
+
+var process = {
+  nextTick: nextTick,
+  title: title,
+  browser: browser,
+  env: env,
+  argv: argv,
+  version: version,
+  versions: versions,
+  on: on,
+  addListener: addListener,
+  once: once,
+  off: off,
+  removeListener: removeListener,
+  removeAllListeners: removeAllListeners,
+  emit: emit,
+  binding: binding,
+  cwd: cwd,
+  chdir: chdir,
+  umask: umask,
+  hrtime: hrtime,
+  platform: platform,
+  release: release,
+  config: config,
+  uptime: uptime
+};
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+"use strict";
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ */
+
+function makeEmptyFunction(arg) {
+  return function () {
+    return arg;
+  };
+}
+
+/**
+ * This function accepts and discards inputs; it has no side effects. This is
+ * primarily useful idiomatically for overridable function endpoints which
+ * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+ */
+var emptyFunction = function emptyFunction() {};
+
+emptyFunction.thatReturns = makeEmptyFunction;
+emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+emptyFunction.thatReturnsThis = function () {
+  return this;
+};
+emptyFunction.thatReturnsArgument = function (arg) {
+  return arg;
+};
+
+var emptyFunction_1 = emptyFunction;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+'use strict';
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var validateFormat = function validateFormat(format) {};
+
+if (process.env.NODE_ENV !== 'production') {
+  validateFormat = function validateFormat(format) {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  };
+}
+
+function invariant(condition, format, a, b, c, d, e, f) {
+  validateFormat(format);
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(format.replace(/%s/g, function () {
+        return args[argIndex++];
+      }));
+      error.name = 'Invariant Violation';
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+}
+
+var invariant_1 = invariant;
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+'use strict';
+
+
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var warning = emptyFunction_1;
+
+if (process.env.NODE_ENV !== 'production') {
+  var printWarning = function printWarning(format) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var argIndex = 0;
+    var message = 'Warning: ' + format.replace(/%s/g, function () {
+      return args[argIndex++];
+    });
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+
+  warning = function warning(condition, format) {
+    if (format === undefined) {
+      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+
+    if (format.indexOf('Failed Composite propType: ') === 0) {
+      return; // Ignore CompositeComponent proptype check.
+    }
+
+    if (!condition) {
+      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
+      }
+
+      printWarning.apply(undefined, [format].concat(args));
+    }
+  };
+}
+
+var warning_1 = warning;
+
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+'use strict';
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+var ReactPropTypesSecret_1 = ReactPropTypesSecret;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+if (process.env.NODE_ENV !== 'production') {
+  var invariant$1 = invariant_1;
+  var warning$1 = warning_1;
+  var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
+  var loggedTypeFailures = {};
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if (process.env.NODE_ENV !== 'production') {
+    for (var typeSpecName in typeSpecs) {
+      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          invariant$1(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$1);
+        } catch (ex) {
+          error = ex;
+        }
+        warning$1(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          warning$1(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+        }
+      }
+    }
+  }
+}
+
+var checkPropTypes_1 = checkPropTypes;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+
+
+
+
+
+
+
+
+var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
+  /* global Symbol */
+  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+  /**
+   * Returns the iterator method function contained on the iterable object.
+   *
+   * Be sure to invoke the function with the iterable as context:
+   *
+   *     var iteratorFn = getIteratorFn(myIterable);
+   *     if (iteratorFn) {
+   *       var iterator = iteratorFn.call(myIterable);
+   *       ...
+   *     }
+   *
+   * @param {?object} maybeIterable
+   * @return {?function}
+   */
+  function getIteratorFn(maybeIterable) {
+    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+    if (typeof iteratorFn === 'function') {
+      return iteratorFn;
+    }
+  }
+
+  /**
+   * Collection of methods that allow declaration and validation of props that are
+   * supplied to React components. Example usage:
+   *
+   *   var Props = require('ReactPropTypes');
+   *   var MyArticle = React.createClass({
+   *     propTypes: {
+   *       // An optional string prop named "description".
+   *       description: Props.string,
+   *
+   *       // A required enum prop named "category".
+   *       category: Props.oneOf(['News','Photos']).isRequired,
+   *
+   *       // A prop named "dialog" that requires an instance of Dialog.
+   *       dialog: Props.instanceOf(Dialog).isRequired
+   *     },
+   *     render: function() { ... }
+   *   });
+   *
+   * A more formal specification of how these methods are used:
+   *
+   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+   *   decl := ReactPropTypes.{type}(.isRequired)?
+   *
+   * Each and every declaration produces a function with the same signature. This
+   * allows the creation of custom validation functions. For example:
+   *
+   *  var MyLink = React.createClass({
+   *    propTypes: {
+   *      // An optional string or URI prop named "href".
+   *      href: function(props, propName, componentName) {
+   *        var propValue = props[propName];
+   *        if (propValue != null && typeof propValue !== 'string' &&
+   *            !(propValue instanceof URI)) {
+   *          return new Error(
+   *            'Expected a string or an URI for ' + propName + ' in ' +
+   *            componentName
+   *          );
+   *        }
+   *      }
+   *    },
+   *    render: function() {...}
+   *  });
+   *
+   * @internal
+   */
+
+  var ANONYMOUS = '<<anonymous>>';
+
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+  var ReactPropTypes = {
+    array: createPrimitiveTypeChecker('array'),
+    bool: createPrimitiveTypeChecker('boolean'),
+    func: createPrimitiveTypeChecker('function'),
+    number: createPrimitiveTypeChecker('number'),
+    object: createPrimitiveTypeChecker('object'),
+    string: createPrimitiveTypeChecker('string'),
+    symbol: createPrimitiveTypeChecker('symbol'),
+
+    any: createAnyTypeChecker(),
+    arrayOf: createArrayOfTypeChecker,
+    element: createElementTypeChecker(),
+    instanceOf: createInstanceTypeChecker,
+    node: createNodeChecker(),
+    objectOf: createObjectOfTypeChecker,
+    oneOf: createEnumTypeChecker,
+    oneOfType: createUnionTypeChecker,
+    shape: createShapeTypeChecker,
+    exact: createStrictShapeTypeChecker,
+  };
+
+  /**
+   * inlined Object.is polyfill to avoid requiring consumers ship their own
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+   */
+  /*eslint-disable no-self-compare*/
+  function is(x, y) {
+    // SameValue algorithm
+    if (x === y) {
+      // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
+    }
+  }
+  /*eslint-enable no-self-compare*/
+
+  /**
+   * We use an Error-like object for backward compatibility as people may call
+   * PropTypes directly and inspect their output. However, we don't use real
+   * Errors anymore. We don't inspect their stack anyway, and creating them
+   * is prohibitively expensive if they are created too often, such as what
+   * happens in oneOfType() for any type before the one that matched.
+   */
+  function PropTypeError(message) {
+    this.message = message;
+    this.stack = '';
+  }
+  // Make `instanceof Error` still work for returned errors.
+  PropTypeError.prototype = Error.prototype;
+
+  function createChainableTypeChecker(validate) {
+    if (process.env.NODE_ENV !== 'production') {
+      var manualPropTypeCallCache = {};
+      var manualPropTypeWarningCount = 0;
+    }
+    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+      componentName = componentName || ANONYMOUS;
+      propFullName = propFullName || propName;
+
+      if (secret !== ReactPropTypesSecret_1) {
+        if (throwOnDirectAccess) {
+          // New behavior only for users of `prop-types` package
+          invariant_1(
+            false,
+            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+            'Use `PropTypes.checkPropTypes()` to call them. ' +
+            'Read more at http://fb.me/use-check-prop-types'
+          );
+        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+          // Old behavior for people using React.PropTypes
+          var cacheKey = componentName + ':' + propName;
+          if (
+            !manualPropTypeCallCache[cacheKey] &&
+            // Avoid spamming the console because they are often not actionable except for lib authors
+            manualPropTypeWarningCount < 3
+          ) {
+            warning_1(
+              false,
+              'You are manually calling a React.PropTypes validation ' +
+              'function for the `%s` prop on `%s`. This is deprecated ' +
+              'and will throw in the standalone `prop-types` package. ' +
+              'You may be seeing this warning due to a third-party PropTypes ' +
+              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
+              propFullName,
+              componentName
+            );
+            manualPropTypeCallCache[cacheKey] = true;
+            manualPropTypeWarningCount++;
+          }
+        }
+      }
+      if (props[propName] == null) {
+        if (isRequired) {
+          if (props[propName] === null) {
+            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+          }
+          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+        }
+        return null;
+      } else {
+        return validate(props, propName, componentName, location, propFullName);
+      }
+    }
+
+    var chainedCheckType = checkType.bind(null, false);
+    chainedCheckType.isRequired = checkType.bind(null, true);
+
+    return chainedCheckType;
+  }
+
+  function createPrimitiveTypeChecker(expectedType) {
+    function validate(props, propName, componentName, location, propFullName, secret) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== expectedType) {
+        // `propValue` being instance of, say, date/regexp, pass the 'object'
+        // check, but we can offer a more precise error message here rather than
+        // 'of type `object`'.
+        var preciseType = getPreciseType(propValue);
+
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createAnyTypeChecker() {
+    return createChainableTypeChecker(emptyFunction_1.thatReturnsNull);
+  }
+
+  function createArrayOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+      }
+      var propValue = props[propName];
+      if (!Array.isArray(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+      }
+      for (var i = 0; i < propValue.length; i++) {
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret_1);
+        if (error instanceof Error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createElementTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!isValidElement(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createInstanceTypeChecker(expectedClass) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!(props[propName] instanceof expectedClass)) {
+        var expectedClassName = expectedClass.name || ANONYMOUS;
+        var actualClassName = getClassName(props[propName]);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createEnumTypeChecker(expectedValues) {
+    if (!Array.isArray(expectedValues)) {
+      process.env.NODE_ENV !== 'production' ? warning_1(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
+      return emptyFunction_1.thatReturnsNull;
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      for (var i = 0; i < expectedValues.length; i++) {
+        if (is(propValue, expectedValues[i])) {
+          return null;
+        }
+      }
+
+      var valuesString = JSON.stringify(expectedValues);
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createObjectOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+      }
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+      }
+      for (var key in propValue) {
+        if (propValue.hasOwnProperty(key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
+          if (error instanceof Error) {
+            return error;
+          }
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createUnionTypeChecker(arrayOfTypeCheckers) {
+    if (!Array.isArray(arrayOfTypeCheckers)) {
+      process.env.NODE_ENV !== 'production' ? warning_1(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+      return emptyFunction_1.thatReturnsNull;
+    }
+
+    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+      var checker = arrayOfTypeCheckers[i];
+      if (typeof checker !== 'function') {
+        warning_1(
+          false,
+          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+          'received %s at index %s.',
+          getPostfixForTypeWarning(checker),
+          i
+        );
+        return emptyFunction_1.thatReturnsNull;
+      }
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+        var checker = arrayOfTypeCheckers[i];
+        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret_1) == null) {
+          return null;
+        }
+      }
+
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createNodeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!isNode(props[propName])) {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      for (var key in shapeTypes) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          continue;
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createStrictShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      // We need to check all keys in case some are required but missing from
+      // props.
+      var allKeys = objectAssign({}, props[propName], shapeTypes);
+      for (var key in allKeys) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          return new PropTypeError(
+            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
+          );
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+
+    return createChainableTypeChecker(validate);
+  }
+
+  function isNode(propValue) {
+    switch (typeof propValue) {
+      case 'number':
+      case 'string':
+      case 'undefined':
+        return true;
+      case 'boolean':
+        return !propValue;
+      case 'object':
+        if (Array.isArray(propValue)) {
+          return propValue.every(isNode);
+        }
+        if (propValue === null || isValidElement(propValue)) {
+          return true;
+        }
+
+        var iteratorFn = getIteratorFn(propValue);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(propValue);
+          var step;
+          if (iteratorFn !== propValue.entries) {
+            while (!(step = iterator.next()).done) {
+              if (!isNode(step.value)) {
+                return false;
+              }
+            }
+          } else {
+            // Iterator will provide entry [k,v] tuples rather than values.
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                if (!isNode(entry[1])) {
+                  return false;
+                }
+              }
+            }
+          }
+        } else {
+          return false;
+        }
+
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  function isSymbol(propType, propValue) {
+    // Native Symbol.
+    if (propType === 'symbol') {
+      return true;
+    }
+
+    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+    if (propValue['@@toStringTag'] === 'Symbol') {
+      return true;
+    }
+
+    // Fallback for non-spec compliant Symbols which are polyfilled.
+    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Equivalent of `typeof` but with special handling for array and regexp.
+  function getPropType(propValue) {
+    var propType = typeof propValue;
+    if (Array.isArray(propValue)) {
+      return 'array';
+    }
+    if (propValue instanceof RegExp) {
+      // Old webkits (at least until Android 4.0) return 'function' rather than
+      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+      // passes PropTypes.object.
+      return 'object';
+    }
+    if (isSymbol(propType, propValue)) {
+      return 'symbol';
+    }
+    return propType;
+  }
+
+  // This handles more types than `getPropType`. Only used for error messages.
+  // See `createPrimitiveTypeChecker`.
+  function getPreciseType(propValue) {
+    if (typeof propValue === 'undefined' || propValue === null) {
+      return '' + propValue;
+    }
+    var propType = getPropType(propValue);
+    if (propType === 'object') {
+      if (propValue instanceof Date) {
+        return 'date';
+      } else if (propValue instanceof RegExp) {
+        return 'regexp';
+      }
+    }
+    return propType;
+  }
+
+  // Returns a string that is postfixed to a warning about an invalid type.
+  // For example, "undefined" or "of type array"
+  function getPostfixForTypeWarning(value) {
+    var type = getPreciseType(value);
+    switch (type) {
+      case 'array':
+      case 'object':
+        return 'an ' + type;
+      case 'boolean':
+      case 'date':
+      case 'regexp':
+        return 'a ' + type;
+      default:
+        return type;
+    }
+  }
+
+  // Returns class name of the object, if any.
+  function getClassName(propValue) {
+    if (!propValue.constructor || !propValue.constructor.name) {
+      return ANONYMOUS;
+    }
+    return propValue.constructor.name;
+  }
+
+  ReactPropTypes.checkPropTypes = checkPropTypes_1;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+
+
+
+
+var factoryWithThrowingShims = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret_1) {
+      // It is still safe when called from React.
+      return;
+    }
+    invariant_1(
+      false,
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+  }
+  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  }
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim,
+    exact: getShim
+  };
+
+  ReactPropTypes.checkPropTypes = emptyFunction_1;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+var propTypes = createCommonjsModule(function (module) {
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (process.env.NODE_ENV !== 'production') {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = factoryWithTypeCheckers(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = factoryWithThrowingShims();
+}
+});
+
+var standardChips = {
+	'1': {
+		color: '#dddddd',
+		textColor: '#cccccc'
+	},
+	'2': {
+		color: 'gold'
+	},
+	'5': {
+		color: '#800000'
+	},
+	'10': {
+		color: '#000099',
+		textColor: '#00016C'
+	},
+	'20': {
+		color: '#cccccc'
+	},
+	'25': {
+		color: '#008000'
+	},
+	'50': {
+		color: 'orange'
+	},
+	'100': {
+		color: '#222222',
+		textColor: '#000000'
+	},
+	'250': {
+		color: 'pink'
+	},
+	'500': {
+		color: 'purple'
+	},
+	'1000': {
+		color: '#800020'
+	},
+	'2000': {
+		color: 'lightblue'
+	},
+	'5000': {
+		color: 'brown'
+	}
+};
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+
+
+
+
+var asyncGenerator = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
+
+  function AsyncGenerator(gen) {
+    var front, back;
+
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+
+        case "throw":
+          front.reject(value);
+          break;
+
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+
+      front = front.next;
+
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+
+    this._invoke = send;
+
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
+
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
+
+
+
+
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+
+
+
+
+
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+
+
+var inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+
+
+
+
+
+
+
+
+
+
+var possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
+var defaultChipStackStyles = {
+	border: '2px dashed lightgray',
+	position: 'relative',
+	borderRadius: '100%',
+	boxSizing: 'border-box',
+	fontSize: '12px'
+};
+
+var defaultChipStackItemStyles = {
+	zIndex: 1,
+	position: 'absolute',
+	left: 0,
+	top: 0,
+	width: '100%',
+	height: '100%'
+};
+
+var ChipStackContext = React.createContext({
+	isInStack: false
+});
+
+var ChipStack = function (_React$Component) {
+	inherits(ChipStack, _React$Component);
+
+	function ChipStack() {
+		classCallCheck(this, ChipStack);
+		return possibleConstructorReturn(this, (ChipStack.__proto__ || Object.getPrototypeOf(ChipStack)).apply(this, arguments));
+	}
+
+	createClass(ChipStack, [{
+		key: 'render',
+		value: function render() {
+			var _props = this.props,
+			    children = _props.children,
+			    stackLayerOffset = _props.stackLayerOffset,
+			    largeStackLayerOffset = _props.largeStackLayerOffset,
+			    style = _props.style,
+			    rawDiameter = _props.diameter;
+
+
+			var chipCount = children ? children.length : 0;
+			var diameter = isNaN(rawDiameter) ? rawDiameter : rawDiameter + 'px';
+			var offset = chipCount > 5 ? largeStackLayerOffset : stackLayerOffset;
+
+			return React.createElement(
+				ChipStackContext.Provider,
+				{
+					value: {
+						isInStack: true
+					}
+				},
+				React.createElement(
+					'div',
+					{
+						style: _extends({}, defaultChipStackStyles, style, {
+							width: diameter,
+							height: diameter
+						})
+					},
+					React.Children.map(children, function (child, i) {
+						var stackItemStyle = {
+							'transform': 'translate(' + offset * i + 'px,' + offset * i + 'px)'
+						};
+
+						return React.createElement(
+							'div',
+							{
+								style: _extends({}, defaultChipStackItemStyles, stackItemStyle)
+							},
+							child
+						);
+					})
+				)
+			);
+		}
+	}]);
+	return ChipStack;
+}(React.Component);
+
+ChipStack.propTypes = {
+	children: propTypes.oneOfType([propTypes.arrayOf(propTypes.node), propTypes.node]),
+	style: propTypes.object,
+	stackLayerOffset: propTypes.number,
+	stackLayerMaxOffset: propTypes.number,
+	diameter: propTypes.number
+};
+
+ChipStack.defaultProps = {
+	style: {},
+	diameter: DEFAULT_CHIP_DIAMETER,
+	stackLayerOffset: 2,
+	largeStackLayerOffset: 1
+};
+
+var isNullOrUndefined = function isNullOrUndefined(val) {
+  return typeof val === 'undefined' || val === null;
+};
+
+var getFirstDefinedValue = function getFirstDefinedValue() {
+    for (var _len = arguments.length, values = Array(_len), _key = 0; _key < _len; _key++) {
+        values[_key] = arguments[_key];
+    }
+
+    var firstDefinedValue = void 0;
+
+    values.some(function (value) {
+        if (!isNullOrUndefined(value)) {
+            firstDefinedValue = value;
+            return true;
+        }
+
+        return false;
+    });
+
+    return firstDefinedValue;
+};
+
+var DEFAULT_CHIP_DIAMETER = 120;
+
+var Chip = function Chip(_ref) {
+	var value = _ref.value,
+	    propDiameter = _ref.diameter,
+	    shadow = _ref.shadow,
+	    propColor = _ref.color,
+	    propTextColor = _ref.textColor;
+
+	var isStandardValue = standardChips.hasOwnProperty(value + '');
+	var color = void 0,
+	    textColor = void 0;
+
+	if (isStandardValue) {
+		var _standardChips = standardChips[value + ''],
+		    standardColor = _standardChips.color,
+		    standardTextColor = _standardChips.textColor;
+
+		color = propColor || standardColor;
+		textColor = standardTextColor && !(propColor || propTextColor) ? standardTextColor : propTextColor || color;
+	} else {
+		color = propColor || 'grey';
+		textColor = propTextColor || color;
+	}
+
+	var textFilter = color === textColor ? 'url(#darken)' : 'none';
+
+	var shadowStyle = typeof shadow === "boolean" ? shadow ? { boxShadow: '0 0 5px 1px rgba(0, 0, 0, 0.5), 0 0 3px 0 rgba(0, 0, 0, 0.4) inset' } : {} : { boxShadow: shadow };
+
+	return React.createElement(
+		ChipStackContext.Consumer,
+		null,
+		function (_ref2) {
+			var isInStack = _ref2.isInStack;
+
+			var diameter = !isInStack ? getFirstDefinedValue(propDiameter, DEFAULT_CHIP_DIAMETER) : '100%';
+
+			return React.createElement(
+				'svg',
+				{
+					viewBox: '0 0 200 200',
+					style: _extends({
+						borderRadius: '50%',
+						width: isNaN(diameter) ? diameter : diameter + 'px',
+						height: isNaN(diameter) ? diameter : diameter + 'px'
+					}, shadowStyle),
+					xmlns: 'http://www.w3.org/2000/svg'
+				},
+				React.createElement(
+					'defs',
+					null,
+					React.createElement(
+						'filter',
+						{ id: 'darken' },
+						React.createElement(
+							'feComponentTransfer',
+							null,
+							React.createElement('feFuncR', { type: 'linear', slope: '1', intercept: '-.05' }),
+							React.createElement('feFuncG', { type: 'linear', slope: '1', intercept: '-.05' }),
+							React.createElement('feFuncB', { type: 'linear', slope: '1', intercept: '-.05' })
+						)
+					)
+				),
+				React.createElement('circle', {
+					cx: '100',
+					cy: '100',
+					r: '100',
+					style: { fill: color }
+				}),
+				React.createElement('circle', {
+					cx: '100',
+					cy: '100',
+					r: '92',
+					style: {
+						fill: 'none',
+						strokeDasharray: '25.8 70.4',
+						strokeDashoffset: '12px',
+						stroke: 'white',
+						strokeWidth: '17px'
+					}
+				}),
+				React.createElement('circle', {
+					filter: textFilter,
+					cx: '100',
+					cy: '100',
+					r: '70',
+					style: {
+						fill: 'none',
+						stroke: textColor,
+						strokeWidth: '3px'
+					}
+				}),
+				React.createElement('circle', {
+					cx: '100',
+					cy: '100',
+					r: '70',
+					style: {
+						fill: 'none',
+						strokeDasharray: '18.6 18',
+						strokeDashoffset: '9px',
+						stroke: 'white',
+						strokeWidth: '3px'
+					}
+				}),
+				React.createElement(
+					'text',
+					{
+						x: '100',
+						y: '100',
+						filter: textFilter,
+						fill: textColor,
+						textAnchor: 'middle',
+						alignmentBaseline: 'central',
+						style: {
+							fontFamily: 'arial',
+							fontSize: '60px',
+							fontWeight: 'bold',
+							textShadow: '-1px -1px 0px rgba(0, 0, 0, 0.3), 1px 1px 0px rgba(255, 255, 255, 0.2)'
+						}
+					},
+					value
+				)
+			);
+		}
+	);
+};
+
+Chip.propTypes = {
+	value: propTypes.number.isRequired,
+	diameter: propTypes.number,
+	color: propTypes.string,
+	textColor: propTypes.string,
+	shadow: propTypes.bool
+};
+
+Chip.defaultProps = {
+	shadow: true
+};
+
+var tileId = 0;
+
+var round = function round(number) {
+    return Number(number.toFixed(3));
+};
+
+function rotatePoint(pivot, point, angle) {
+    return [Math.cos(angle) * (point[0] - pivot[0]) + Math.sin(angle) * (point[1] - pivot[1]) + pivot[0], Math.cos(angle) * (point[1] - pivot[1]) - Math.sin(angle) * (point[0] - pivot[0]) + pivot[1]];
+}
+
+function getPoints(radius, borderWidth, n) {
+    var vertices = [];
+    var angleBorderWidth = borderWidth / Math.sin(Math.PI / 3);
+    var deltaAngle = 2 * Math.PI / n;
+
+    for (var i = 0; i < n; i++) {
+        var angle = Math.PI / 2 + i * deltaAngle;
+        vertices.push([radius + Math.cos(angle) * (radius - angleBorderWidth / 2), //half the stroke width seems to detract from the fill, there divide by 2 
+        radius - Math.sin(angle) * (radius - angleBorderWidth / 2)]);
+    }
+
+    return vertices.map(function (p) {
+        return p.map(round);
+    });
+}
+
+function getFlatTopPoints(radius, offset, n) {
+    return getPoints(radius, offset, n).map(function (p) {
+        return rotatePoint([radius, radius], p, Math.PI / n);
+    });
+}
+
+function NTile(props) {
+    var backgroundImage = props.backgroundImage,
+        bevel = props.bevel,
+        radius = props.radius,
+        flatTop = props.flatTop,
+        borderWidth = props.borderWidth,
+        borderColor = props.borderColor,
+        backgroundColor = props.backgroundColor,
+        children = props.children,
+        shadow = props.shadow,
+        n = props.n;
+
+    var ownId = tileId++;
+    var bgId = backgroundImage && 'bg-' + ownId;
+    var polygonStyle = {
+        fill: backgroundImage ? 'url(#' + bgId + ')' : backgroundColor,
+        stroke: borderColor,
+        strokeWidth: borderWidth
+    };
+    var points = flatTop ? getFlatTopPoints(radius, borderWidth, n) : getPoints(radius, borderWidth, n);
+    var polygonPoints = points.map(function (point) {
+        return point.join(',');
+    }).join(' ');
+    var bevelFilter = bevel ? 'url(#bevel)' : 'none';
+
+    var shadowStyle = typeof shadow === "boolean" ? shadow ? { filter: 'drop-shadow(1px 1px 2px rgba(82,81,82,1))' } : {} : { shadow: shadow };
+
+    var backgroundSize = {
+        height: 2 * (flatTop ? radius / (Math.sqrt(3) / 2) : radius),
+        width: 2 * (flatTop ? radius : radius / (Math.sqrt(3) / 2))
+    };
+
+    return React.createElement(
+        'svg',
+        {
+            viewBox: '0 0 ' + radius * 2 + ' ' + radius * 2,
+            style: _extends({
+                width: radius * 2 + 'px',
+                height: radius * 2 + 'px',
+                position: 'relative'
+            }, shadowStyle)
+        },
+        React.createElement(
+            'defs',
+            null,
+            React.createElement(
+                'filter',
+                { id: 'bevel', filterUnits: 'objectBoundingBox', x: '-10%', y: '-10%', width: '150%', height: '150%' },
+                React.createElement('feGaussianBlur', {
+                    'in': 'SourceAlpha',
+                    stdDeviation: '1.5',
+                    result: 'blur'
+                }),
+                React.createElement(
+                    'feSpecularLighting',
+                    {
+                        'in': 'blur',
+                        surfaceScale: '5',
+                        specularConstant: '0.5',
+                        specularExponent: '30',
+                        result: 'specOut',
+                        lightingColor: 'lightgrey'
+                    },
+                    React.createElement('fePointLight', { x: '-5000', y: '-5000', z: '8000' })
+                ),
+                React.createElement('feComposite', {
+                    'in': 'specOut',
+                    in2: 'SourceAlpha',
+                    operator: 'in',
+                    result: 'specOut2'
+                }),
+                React.createElement('feComposite', {
+                    'in': 'SourceGraphic',
+                    in2: 'specOut2',
+                    operator: 'arithmetic',
+                    k1: '0',
+                    k2: '1',
+                    k3: '1',
+                    k4: '0',
+                    result: 'litPaint'
+                })
+            ),
+            React.createElement(
+                'clipPath',
+                { id: 'tileClip' + ownId },
+                React.createElement('polygon', { points: polygonPoints })
+            ),
+            React.createElement(
+                'pattern',
+                { id: bgId, width: backgroundSize.width, height: backgroundSize.height, patternUnits: 'userSpaceOnUse' },
+                React.createElement('image', {
+                    width: backgroundSize.width,
+                    height: backgroundSize.height,
+                    xlinkHref: backgroundImage,
+                    preserveAspectRatio: 'xMidYMid slice'
+                })
+            )
+        ),
+        React.createElement('polygon', {
+            style: polygonStyle,
+            filter: bevelFilter,
+            points: polygonPoints
+        }),
+        React.createElement(
+            'foreignObject',
+            { x: '0', y: '0', width: '100%', height: '100%', clipPath: 'url(#tileClip' + ownId + ')' },
+            React.createElement(
+                'div',
+                {
+                    style: {
+                        width: 2 * radius + 'px',
+                        height: 2 * radius + 'px',
+                        position: 'relative',
+                        WebkitClipPath: 'url(#tileClip' + ownId + ')',
+                        clipPath: 'url(#tileClip' + ownId + ')'
+                    }
+                },
+                children
+            )
+        )
+    );
+}
+
+NTile.propTypes = {
+    n: propTypes.number.isRequired,
+    flatTop: propTypes.bool,
+    shadow: propTypes.oneOfType([propTypes.bool, propTypes.string]),
+    borderWidth: propTypes.number,
+    borderColor: propTypes.string,
+    backgroundColor: propTypes.string,
+    backgroundImage: propTypes.string,
+    children: propTypes.node,
+    bevel: propTypes.bool
+};
+
+NTile.defaultProps = {
+    flatTop: false,
+    shadow: false,
+    borderWidth: 0,
+    borderColor: '#efefef',
+    backgroundColor: 'white',
+    bevel: false
+};
+
+var HexTile = function HexTile(props) {
+    return React.createElement(NTile, _extends({ n: 6 }, props));
+};
+
+HexTile.propTypes = {
+    flatTop: propTypes.bool,
+    shadow: propTypes.oneOfType([propTypes.bool, propTypes.string]),
+    borderWidth: propTypes.number,
+    borderColor: propTypes.string,
+    backgroundColor: propTypes.string,
+    backgroundImage: propTypes.string,
+    children: propTypes.node,
+    bevel: propTypes.bool
+};
+
+var SquareTile = function SquareTile(props) {
+    return React.createElement(NTile, _extends({ n: 4 }, props, { flatTop: true }));
+};
+
+SquareTile.propTypes = {
+    shadow: propTypes.oneOfType([propTypes.bool, propTypes.string]),
+    borderWidth: propTypes.number,
+    borderColor: propTypes.string,
+    backgroundColor: propTypes.string,
+    backgroundImage: propTypes.string,
+    children: propTypes.node,
+    bevel: propTypes.bool
+};
+
+var isBoolean = function isBoolean(val) {
+  return typeof val === 'boolean';
+};
+
+var containerStyles = {
+    width: '100%',
+    height: '100%',
+    display: 'inline-block',
+    perspective: '1000px'
+};
+
+var frontStyles = {
+    WebkitBackfaceVisibility: 'hidden',
+    backfaceVisibility: 'hidden',
+    zIndex: 2,
+    transform: 'rotateY(0deg)', //for firefox 31
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    top: 0
+};
+
+var backStyles = {
+    WebkitBackfaceVisibility: 'hidden',
+    backfaceVisibility: 'hidden',
+    transform: 'rotateY(180deg)',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    top: 0
+};
+
+var Flipper = function Flipper(_ref) {
+    var animateRotation = _ref.animateRotation,
+        isFlipped = _ref.isFlipped,
+        rotation = _ref.rotation,
+        children = _ref.children;
+    return React.createElement(
+        'div',
+        { style: _extends({}, containerStyles) },
+        React.createElement(
+            'div',
+            {
+                style: {
+                    transition: animateRotation ? isBoolean(animateRotation) ? '0.4s' : animateRotation + 's' : 'none',
+                    transform: 'rotateY(' + ((isFlipped ? 180 : 0) + rotation) + 'deg',
+                    transformStyle: 'preserve-3d',
+                    position: 'relative',
+                    width: '100%',
+                    height: '100%'
+                }
+            },
+            React.createElement(
+                'div',
+                { style: frontStyles },
+                children[0]
+            ),
+            React.createElement(
+                'div',
+                { style: backStyles },
+                children[1]
+            )
+        )
+    );
+};
+
+Flipper.propTypes = {
+    isFlipped: propTypes.bool,
+    rotation: propTypes.number,
+    animateRotation: propTypes.oneOfType([propTypes.bool, propTypes.number]),
+    children: propTypes.node.isRequired
+};
+
+Flipper.defaultProps = {
+    isFlipped: false,
+    rotation: 0,
+    animateRotation: true
+};
+
+var isNumeric = function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+var isObject = function isObject(val) {
+  return (typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object';
+};
+
+var defaultStackStyles = {
+	position: 'relative'
+};
+
+var defaultStackItemStyles = {
+	position: 'absolute',
+	top: 0,
+	left: 0,
+	right: 0,
+	bottom: 0,
+	width: '100%',
+	height: '100%'
+};
+
+var defaultRandomNumbers = [0.5, 0.14, 0.77, 0.08, 0.40, 0.27, 0.73, 0.33, 0.02, 0.58, 0.91];
+var defaultMessy = false;
+var defaultMessAngle = 15;
+var defaultStackLayerOffset = 1;
+var defaultStackLayerMaxOffset = 10;
+
+var CardStackContext = React.createContext({
+	isInStack: false
+});
+
+function getTransformForCardInCardStack(props, cardIndex) {
+	var _props$randomNumbers = props.randomNumbers,
+	    randomNumbers = _props$randomNumbers === undefined ? defaultRandomNumbers : _props$randomNumbers,
+	    _props$messAngle = props.messAngle,
+	    messAngle = _props$messAngle === undefined ? defaultMessAngle : _props$messAngle,
+	    _props$messy = props.messy,
+	    messy = _props$messy === undefined ? defaultMessy : _props$messy,
+	    _props$stackLayerOffs = props.stackLayerOffset,
+	    stackLayerOffset = _props$stackLayerOffs === undefined ? defaultStackLayerOffset : _props$stackLayerOffs,
+	    _props$stackLayerMaxO = props.stackLayerMaxOffset,
+	    stackLayerMaxOffset = _props$stackLayerMaxO === undefined ? defaultStackLayerMaxOffset : _props$stackLayerMaxO;
+
+
+	return messy ? {
+		x: 0,
+		y: 0,
+		rotate: randomNumbers[cardIndex % randomNumbers.length] * messAngle - messAngle / 2
+	} : {
+		x: Math.min(cardIndex * stackLayerOffset, stackLayerMaxOffset),
+		y: Math.min(cardIndex * stackLayerOffset, stackLayerMaxOffset),
+		rotate: 0
+	};
+}
+
+var CardStack = function (_React$Component) {
+	inherits(CardStack, _React$Component);
+
+	function CardStack() {
+		classCallCheck(this, CardStack);
+		return possibleConstructorReturn(this, (CardStack.__proto__ || Object.getPrototypeOf(CardStack)).apply(this, arguments));
+	}
+
+	createClass(CardStack, [{
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			var _props = this.props,
+			    children = _props.children,
+			    background = _props.background,
+			    style = _props.style,
+			    rawWidth = _props.width,
+			    rawHeight = _props.height,
+			    faceUp = _props.faceUp,
+			    rotateY = _props.rotateY,
+			    shadow = _props.shadow,
+			    border = _props.border,
+			    borderRadius = _props.borderRadius,
+			    stackBorder = _props.stackBorder,
+			    animateRotation = _props.animateRotation,
+			    animateShadow = _props.animateShadow;
+
+
+			var isHeightSet = !isNullOrUndefined(this.props.height) && this.props.height !== 0;
+			var width = isNaN(this.props.width) ? this.props.width : this.props.width + 'px';
+			var height = void 0,
+			    paddingTop = 0;
+
+			if (isHeightSet) {
+				height = this.props.height;
+			} else {
+				paddingTop = 100 / this.props.aspectRatio + '%';
+			}
+
+			var stackBorderStyles = { border: stackBorder };
+			var borderRadiusStyles = { borderRadius: borderRadius };
+
+			if (isBoolean(stackBorder)) {
+				stackBorderStyles = stackBorder ? { border: '2px dashed lightgray' } : '';
+			} else if (isNumeric(stackBorder)) {
+				stackBorderStyles = { border: stackBorder + 'px dashed lightgray' };
+			}
+
+			if (isBoolean(borderRadius)) {
+				borderRadiusStyles = borderRadius ? { borderRadius: '6px' } : {};
+			} else if (isNumeric(borderRadius)) {
+				borderRadiusStyles = { borderRadius: borderRadius + 'px' };
+			}
+
+			var backgroundElement = void 0;
+			if (background) {
+				backgroundElement = isObject(background) ? background : React.createElement('div', { style: { background: 'url(' + background } });
+			}
+
+			return React.createElement(
+				CardStackContext.Provider,
+				{
+					value: {
+						isInStack: true,
+						faceUp: faceUp,
+						rotateY: rotateY,
+						shadow: shadow,
+						border: border,
+						borderRadius: borderRadius,
+						animateRotation: animateRotation,
+						animateShadow: animateShadow
+					}
+				},
+				React.createElement(
+					'div',
+					{
+						style: _extends({}, defaultStackStyles, style, {
+							width: width,
+							height: height,
+							position: 'relative',
+							display: 'inline-block'
+						})
+					},
+					React.createElement('div', {
+						style: {
+							float: 'left',
+							paddingTop: paddingTop
+						}
+					}),
+					React.createElement(
+						'div',
+						{
+							style: {
+								position: 'absolute',
+								top: 0,
+								left: 0,
+								right: 0,
+								bottom: 0
+							}
+						},
+						React.createElement('div', {
+							style: _extends({}, defaultStackItemStyles, stackBorderStyles, borderRadiusStyles, {
+								boxSizing: 'border-box'
+							})
+						}),
+						backgroundElement,
+						React.Children.map(children, function (child, i) {
+							var _getTransformForCardI = getTransformForCardInCardStack(_this2.props, i),
+							    x = _getTransformForCardI.x,
+							    y = _getTransformForCardI.y,
+							    rotate = _getTransformForCardI.rotate;
+
+							return React.createElement(
+								'div',
+								{
+									style: _extends({}, defaultStackItemStyles, {
+										transform: 'translate(' + x + 'px,' + y + 'px) rotate(' + rotate + 'deg)'
+									})
+								},
+								child
+							);
+						})
+					)
+				)
+			);
+		}
+	}]);
+	return CardStack;
+}(React.Component);
+
+CardStack.propTypes = {
+	children: propTypes.oneOfType([propTypes.arrayOf(propTypes.node), propTypes.node]),
+	background: propTypes.oneOfType([propTypes.string, propTypes.node]),
+	style: propTypes.object,
+	messy: propTypes.bool,
+	messAngle: propTypes.number,
+	stackLayerOffset: propTypes.number,
+	stackLayerMaxOffset: propTypes.number,
+	width: propTypes.oneOfType([propTypes.number, propTypes.string]).isRequired,
+	height: propTypes.oneOfType([propTypes.number, propTypes.string]),
+	aspectRatio: propTypes.number,
+	faceUp: propTypes.bool,
+	rotateY: propTypes.number,
+	shadow: propTypes.oneOfType([propTypes.string, propTypes.bool, propTypes.number]),
+	border: propTypes.oneOfType([propTypes.string, propTypes.bool, propTypes.number]),
+	borderRadius: propTypes.oneOfType([propTypes.string, propTypes.bool, propTypes.number]),
+	animateRotation: propTypes.oneOfType([propTypes.bool, propTypes.number]),
+	animateShadow: propTypes.oneOfType([propTypes.bool, propTypes.number]),
+	randomNumbers: propTypes.arrayOf(propTypes.number),
+	stackBorder: propTypes.oneOfType([propTypes.string, propTypes.bool, propTypes.number])
+};
+
+CardStack.defaultProps = {
+	style: {},
+	messy: defaultMessy,
+	messAngle: defaultMessAngle,
+	stackLayerOffset: defaultStackLayerOffset,
+	stackLayerMaxOffset: defaultStackLayerMaxOffset,
+	randomNumbers: defaultRandomNumbers,
+	width: DEFAULT_CARD_WIDTH,
+	aspectRatio: 0.7,
+	stackBorder: true,
+	borderRadius: 6
+};
+
+var DEFAULT_CARD_WIDTH = 210;
+var DEFAULT_CARD_HEIGHT = 300;
+
+var baseStyles = {
+	backgroundPosition: 'center center',
+	backgroundRepeat: 'no-repeat',
+	backgroundSize: 'cover',
+	display: 'inline-block',
+	boxSizing: 'border-box',
+	position: 'absolute',
+	overflow: 'hidden',
+	top: 0,
+	left: 0,
+	right: 0,
+	bottom: 0,
+	backgroundColor: 'white'
+};
+
+var renderSide = function renderSide(side, style) {
+	return isObject(side) ? React.createElement(
+		'div',
+		{ style: style },
+		side
+	) : React.createElement('div', { style: _extends({}, style, { backgroundImage: 'url(' + side + ')' }) });
+};
+
+var getStyle = function getStyle(props, stackContext) {
+	var shadow = getFirstDefinedValue(props.shadow, stackContext.shadow, true);
+	var animateShadow = getFirstDefinedValue(props.animateShadow, stackContext.animateShadow, true);
+	var border = getFirstDefinedValue(props.border, stackContext.border, true);
+	var borderRadius = getFirstDefinedValue(props.borderRadius, stackContext.borderRadius, true);
+
+	var shadowStyle = { boxShadow: shadow };
+	var borderStyle = { border: border };
+	var borderRadiusStyle = { borderRadius: borderRadius };
+
+	if (isBoolean(shadow)) {
+		shadowStyle = shadow ? { boxShadow: '1px 1px 2px 0px rgba(82,81,82,1)' } : {};
+	} else if (isNumeric(shadow)) {
+		shadowStyle = { boxShadow: shadow + 'px ' + shadow + 'px ' + shadow + 'px 0px rgba(82,81,82,1)' };
+	}
+
+	if (isBoolean(animateShadow)) {
+		shadowStyle.transition = animateShadow ? '0.4s box-shadow' : '';
+	} else if (isNumeric(animateShadow)) {
+		shadowStyle.transition = animateShadow + 's box-shadow';
+	}
+
+	if (isBoolean(border)) {
+		borderStyle = border ? { border: '1px solid #efefef' } : {};
+	} else if (isNumeric(border)) {
+		borderStyle = { border: border + 'px solid #efefef' };
+	}
+
+	if (isBoolean(borderRadius)) {
+		borderRadiusStyle = borderRadius ? { borderRadius: '6px' } : {};
+	} else if (isNumeric(borderRadius)) {
+		borderRadiusStyle = { borderRadius: borderRadius + 'px' };
+	}
+
+	return _extends({}, shadowStyle, borderStyle, borderRadiusStyle, baseStyles);
+};
+
+var Card = function Card(props) {
+	var frontStyle = props.frontStyle,
+	    backStyle = props.backStyle,
+	    borderRadius = props.borderRadius,
+	    front = props.front,
+	    back = props.back;
+
+
+	return React.createElement(
+		CardStackContext.Consumer,
+		null,
+		function (stackContext) {
+			var styles = getStyle(props, stackContext);
+
+			var defaultWidth = stackContext.isInStack ? '100%' : DEFAULT_CARD_WIDTH;
+			var defaultHeight = stackContext.isInStack ? '100%' : DEFAULT_CARD_HEIGHT;
+
+			var isWidthSet = !isNullOrUndefined(props.width);
+			var isHeightSet = !isNullOrUndefined(props.height) && props.height !== 0;
+			var isAspectRatioSet = !isNullOrUndefined(props.aspectRatio);
+
+			var width = isWidthSet ? props.width : defaultWidth;
+			var height = void 0,
+			    paddingTop = 0;
+
+			if (isHeightSet || isWidthSet && isAspectRatioSet) {
+				if (isHeightSet) {
+					height = props.height;
+				} else {
+					paddingTop = 100 / props.aspectRatio + '%';
+				}
+			} else {
+				height = defaultHeight;
+			}
+
+			return React.createElement(
+				'div',
+				{
+					style: {
+						width: isNaN(width) ? width : width + 'px',
+						height: isNaN(height) ? height : height + 'px',
+						position: 'relative',
+						display: 'inline-block'
+					}
+				},
+				React.createElement('div', {
+					style: {
+						float: 'left',
+						paddingTop: paddingTop
+					}
+				}),
+				React.createElement(
+					'div',
+					{
+						style: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }
+					},
+					React.createElement(
+						Flipper,
+						{
+							isFlipped: !getFirstDefinedValue(props.faceUp, stackContext.faceUp, false),
+							rotation: getFirstDefinedValue(props.rotateY, stackContext.rotateY, 0),
+							animateRotation: getFirstDefinedValue(props.animateRotation, stackContext.animateRotation, true)
+						},
+						renderSide(front, _extends({}, styles, frontStyle)),
+						renderSide(back, _extends({}, styles, backStyle))
+					)
+				)
+			);
+		}
+	);
+};
+
+Card.propTypes = {
+	front: propTypes.oneOfType([propTypes.string, propTypes.node]),
+	back: propTypes.oneOfType([propTypes.string, propTypes.node]),
+	faceUp: propTypes.bool,
+	rotateY: propTypes.number,
+	shadow: propTypes.oneOfType([propTypes.string, propTypes.bool, propTypes.number]),
+	border: propTypes.oneOfType([propTypes.string, propTypes.bool, propTypes.number]),
+	borderRadius: propTypes.oneOfType([propTypes.string, propTypes.bool, propTypes.number]),
+	animateRotation: propTypes.oneOfType([propTypes.bool, propTypes.number]),
+	animateShadow: propTypes.oneOfType([propTypes.bool, propTypes.number]),
+	width: propTypes.number,
+	height: propTypes.number,
+	aspectRatio: propTypes.number,
+	frontStyle: propTypes.object,
+	backStyle: propTypes.object
+};
+
+Card.defaultProps = {
+	frontStyle: {},
+	backStyle: {}
+};
+
+var handleMissingProp = function handleMissingProp(isRequired, propName, componentName) {
+	if (isRequired) {
+		return new Error('Missing required property ' + propName + ' in ' + componentName);
+	}
+
+	return null;
+};
+
+var createCaseInsentivePropType = function createCaseInsentivePropType(validValues, isRequired) {
+	return function (props, propName, componentName) {
+		var prop = props[propName];
+		var type = typeof prop === 'undefined' ? 'undefined' : _typeof(prop);
+		var caseInsensitiveProp = type === 'string' ? prop.toLowerCase() : prop;
+
+		if (type === 'undefined') {
+			return handleMissingProp(isRequired, propName, componentName);
+		}
+
+		var isValid = validValues.indexOf(caseInsensitiveProp) > -1;
+
+		if (!isValid) {
+			return new Error(propName + ' in ' + componentName + ' must be one of the Values: ' + validValues.join(', '));
+		}
+
+		return null;
+	};
+};
+
+var validRanks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 'king', 'queen', 'jack', 'ace', 'joker'];
+var validSuits = ['hearts', 'spades', 'clubs', 'diamonds'];
+
+var rank = createCaseInsentivePropType(validRanks, false);
+rank.isRequired = createCaseInsentivePropType(validRanks, true);
+
+var suit = createCaseInsentivePropType(validSuits, false);
+suit.isRequired = createCaseInsentivePropType(validSuits, true);
+
+var defaultCardKey = function defaultCardKey(suit$$1, rank$$1, isJoker) {
+    var r = typeof rank$$1 === 'string' ? rank$$1.toLowerCase() : rank$$1;
+    r = r === 'ace' ? 1 : r;
+    r = r === 'jack' ? 11 : r;
+    r = r === 'queen' ? 12 : r;
+    r = r === 'king' ? 13 : r;
+
+    return isJoker ? 'joker' : r + suit$$1.charAt(0);
+};
+
+var DefaultBack = function DefaultBack() {
+    return React.createElement('div', {
+        style: {
+            background: 'url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+CjxyZWN0IHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgZmlsbD0iIzliYTdiNCI+PC9yZWN0Pgo8Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSI0MCIgZmlsbD0iI2RlZiI+PC9jaXJjbGU+CjxwYXRoIGQ9Ik0wIDQwIEE0MCA0MCA0NSAwIDAgNDAgMCBBNDAgNDAgMzE1IDAgMCA4MCA0MCBBNDAgNDAgNDUgMCAwIDQwIDgwIEE0MCA0MCAyNzAgMCAwIDAgNDBaIiBmaWxsPSIjOWJhN2I0Ij48L3BhdGg+Cjwvc3ZnPg=="), padding-box linear-gradient(0deg,#ffffff, #ffffff), white',
+            backgroundSize: '4%',
+            backgroundRepeat: 'repeat',
+            backgroundClip: 'content-box, padding-box',
+            padding: '5%',
+            width: '100%',
+            height: '100%',
+            boxSizing: 'border-box'
+        }
+    });
+};
+
+function getFront(standardCards, key) {
+    return React.createElement('div', {
+        style: {
+            background: 'url("data:image/svg+xml;base64,' + standardCards[key] + '")',
+            width: '100%',
+            height: '100%',
+            boxSizing: 'border-box',
+            backgroundSize: '100% 100%'
+        }
+    });
+}
+
+var makeStandardDeck = function makeStandardDeck(standardCards) {
+    var back = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : React.createElement(DefaultBack, null);
+    var frontStyle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    var getCardKey = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : defaultCardKey;
+
+    var standardCard = function standardCard(props) {
+        return React.createElement(Card, _extends({}, props, {
+            front: getFront(standardCards, getCardKey(props.suit, props.rank, props.isJoker)),
+            back: props.back || back,
+            frontStyle: _extends({}, frontStyle, props.frontStyle)
+        }));
+    };
+
+    standardCard.propTypes = {
+        rank: rank.isRequired,
+        suit: suit.isRequired,
+        isJoker: propTypes.bool
+    };
+
+    standardCard.defaultProps = {
+        rank: 1,
+        suit: 'hearts',
+        isJoker: false
+    };
+
+    return standardCard;
+};
+
+exports.Chip = Chip;
+exports.ChipStack = ChipStack;
+exports.HexTile = HexTile;
+exports.SquareTile = SquareTile;
+exports.Card = Card;
+exports.CardStack = CardStack;
+exports.getTransformForCardInCardStack = getTransformForCardInCardStack;
+exports.makeStandardDeck = makeStandardDeck;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
 //# sourceMappingURL=react-board-game-components.umd.js.map

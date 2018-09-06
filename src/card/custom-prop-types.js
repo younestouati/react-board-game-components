@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const handleMissingProp = (isRequired, propName, componentName) => {
 	if (isRequired) {
 		return new Error(`Missing required property ${propName} in ${componentName}`);
@@ -37,5 +35,4 @@ rank.isRequired = createCaseInsentivePropType(validRanks, true);
 const suit = createCaseInsentivePropType(validSuits, false);
 suit.isRequired = createCaseInsentivePropType(validSuits, true);
 
-const CustomPropTypes = {rank, suit};
-export {CustomPropTypes};
+export { rank, suit };

@@ -116,7 +116,6 @@ storiesOf('Card', module)
         rank={select('rank', ranks)}
         isJoker={boolean('isJoker', false)}
         faceUp={boolean('faceUp', true)}
-        rotateY={number('rotateY', 0, {min: -360, max: 360, step: 1, range: true})}
         animateRotation={boolean('animateRotation', true)}
         shadow={boolean('shadow', true)}
         border={boolean('border', true)}
@@ -132,7 +131,6 @@ storiesOf('Card', module)
           front={text('front', 'https://i.imgur.com/r5ZuuBn.jpg')}
           back={text('back', 'https://i.imgur.com/YtkhlRj.jpg')}
           faceUp={boolean('faceUp', true)}
-          rotateY={number('rotateY', 0, {min: -360, max: 360, step: 1, range: true})}
           animateRotation={boolean('animateRotation', true)}
           shadow={boolean('shadow', true)}
           border={boolean('border', true)}

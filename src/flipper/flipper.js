@@ -13,7 +13,7 @@ const flipperStyles = {
     transformStyle: 'preserve-3d',
     position: 'relative',
     width: '100%',
-    height: '100%'
+    height: '100%',
 };
 
 const frontStyles = {
@@ -39,16 +39,13 @@ const backStyles = {
     top: 0
 };
 
-const Flipper = ({animateRotation, isFlipped, rotation, children}) => (
+const Flipper = ({animateRotation, rotation, children}) => (
     <div style={{...containerStyles}}>
         <div
             style={{
                 transition: animateRotation ? (isBoolean(animateRotation) ? '0.4s' : `${animateRotation}s`) : 'none',
-                transform: `rotateY(${(isFlipped ? 180 : 0) + rotation}deg`,
-                transformStyle: 'preserve-3d',
-                position: 'relative',
-                width: '100%',
-                height: '100%'
+                transform: `rotateY(${rotation}deg`,
+                ...flipperStyles
             }}      
         >
             <div style={frontStyles}>{children[0]}</div>
@@ -58,14 +55,12 @@ const Flipper = ({animateRotation, isFlipped, rotation, children}) => (
 );
 
 Flipper.propTypes = {
-    isFlipped: PropTypes.bool,
     rotation: PropTypes.number,
     animateRotation: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
     children: PropTypes.node.isRequired
 };
 
 Flipper.defaultProps = {
-    isFlipped: false,
     rotation: 0,
     animateRotation: true
 };

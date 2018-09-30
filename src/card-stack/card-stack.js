@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DEFAULT_CARD_WIDTH } from '../card/card';
+import CardContainerContext from '../shared/card-container-context';
 import isNullOrUndefined from '../utils/is-null-or-undefined';
 import isBoolean from '../utils/is-boolean';
 import isNumeric from '../utils/is-numeric';
-import isObject from '../utils/is-object';
-
-const defaultStackStyles = {
-    position: 'relative',
-};
 
 const defaultStackItemStyles = {
     position: 'absolute',
@@ -20,30 +16,25 @@ const defaultStackItemStyles = {
     height: '100%',
 };
 
-const defaultRandomNumbers = [0.5, 0.14, 0.77, 0.08, 0.40, 0.27, 0.73, 0.33, 0.02, 0.58, 0.91];
+const defaultRandomNumbers = [0, -5, 5, 0, -2, -4, -1, 5, 1, 3, 8];
 const defaultMessy = false;
-const defaultMessAngle = 15;
 const defaultStackLayerOffset = 1;
 const defaultStackLayerMaxOffset = 10;
 
-const CardStackContext = React.createContext({
-	isInStack: false,
-});
-
 function getTransformForCardInCardStack(props, cardIndex) {
 	const { 
-		randomNumbers = defaultRandomNumbers,
-		messAngle = defaultMessAngle,
 		messy = defaultMessy,
 		stackLayerOffset = defaultStackLayerOffset,
 		stackLayerMaxOffset = defaultStackLayerMaxOffset
 	} = props;
 
+	const randomNumbers = Array.isArray(messy) ? messy : defaultRandomNumbers;
+
 	return messy
 		? { 
 			x: 0,
 			y: 0,
-			rotate: randomNumbers[cardIndex % randomNumbers.length] * messAngle - messAngle/2 
+			rotate: randomNumbers[cardIndex % randomNumbers.length]
 		} : { 
 			x: Math.min(cardIndex * stackLayerOffset, stackLayerMaxOffset),
 			y: Math.min(cardIndex * stackLayerOffset, stackLayerMaxOffset),
@@ -55,18 +46,14 @@ class CardStack extends React.Component {
     render() {
 		const { 
 			children,
-			background,
 			style,
+			className,
 			width: rawWidth,
 			height: rawHeight,
 			faceUp,
 			rotateY,
-			shadow,
-			border,
-			borderRadius,
-			stackBorder,
-			animateRotation,
-			animateShadow,
+			borderRadius, 
+			insetBorder,
 		} = this.props;
 
 		const isHeightSet = !isNullOrUndefined(rawHeight) && rawHeight !== 0;
@@ -79,50 +66,38 @@ class CardStack extends React.Component {
 			paddingTop = `${100/this.props.aspectRatio}%`;
 		}
 
-		let stackBorderStyles = { border: stackBorder};
-		let borderRadiusStyles = { borderRadius };
-
-		if (isBoolean(stackBorder)) {
-			stackBorderStyles = stackBorder ? { border: '2px dashed lightgray' } : '';
-		} else if (isNumeric(stackBorder)) {
-			stackBorderStyles = { border: `${stackBorder}px dashed lightgray` };			
+		let insetBorderStyles = { border: insetBorder};
+		if (isBoolean(insetBorder)) {
+			insetBorderStyles = insetBorder ? { border: '2px dashed lightgray' } : '';
+		} else if (isNumeric(insetBorder)) {
+			insetBorderStyles = { border: `${insetBorder}px dashed lightgray` };			
 		}
 		
+		let borderRadiusStyles = { borderRadius };
 		if (isBoolean(borderRadius)) {
-			borderRadiusStyles = borderRadius ? { borderRadius: '6px' } : {};
+			borderRadiusStyles = borderRadius ? { borderRadius: '2%' } : {};
 		} else if (isNumeric(borderRadius)) {
 			borderRadiusStyles = { borderRadius: `${borderRadius}px` }
 		}
 
-		let backgroundElement;
-		if (background) {
-			backgroundElement = isObject(background) 
-			? background
-			: <div style={{ background: `url(${background}`}}/>;
-		}
-
         return (
-			<CardStackContext.Provider
+			<CardContainerContext.Provider
 				value={{
-					isInStack: true,
+					isInCardContainer: true,
 					faceUp,
 					rotateY,
-					shadow,
-					border,
 					borderRadius,
-					animateRotation,
-					animateShadow,
 				}}
 			>
 				<div
 					style={{
-						...defaultStackStyles,
+						position: 'relative',
+						display: 'inline-block',
 						...style,
 						width,
 						height,
-						position: 'relative',
-						display: 'inline-block'
 					}}
+					className={className}
 				>
 					<div
 						style={{
@@ -142,12 +117,11 @@ class CardStack extends React.Component {
 						<div
 							style={{
 								...defaultStackItemStyles,
-								...stackBorderStyles,
+								...insetBorderStyles,
 								...borderRadiusStyles,
 								boxSizing: 'border-box',
 							}}
 						/>
-						{backgroundElement}
 						{
 							React.Children.map(children, (child, i) => {
 								const { x, y, rotate } = getTransformForCardInCardStack(this.props, i);
@@ -166,45 +140,51 @@ class CardStack extends React.Component {
 						}
 					</div>
 				</div>
-			</CardStackContext.Provider>
+			</CardContainerContext.Provider>
         );
     }
 }
 
 CardStack.propTypes = {
 	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-	background: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 	style: PropTypes.object,
-	messy: PropTypes.bool,
-	messAngle: PropTypes.number,
+	className: PropTypes.string,
+	messy: PropTypes.oneOfType([PropTypes.bool, PropTypes.arrayOf(PropTypes.number)]),
     stackLayerOffset: PropTypes.number,
 	stackLayerMaxOffset: PropTypes.number,
-	width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-	height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired, // TODO: REMOVE
+	height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // TODO: REMOVE
 	aspectRatio: PropTypes.number,
 	faceUp: PropTypes.bool,
-	rotateY: PropTypes.number,
-	shadow: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
-	border: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
+	rotateY: PropTypes.number, // TODO: MERGE WITH FACEUP
 	borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
-	animateRotation: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-	animateShadow: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-	randomNumbers: PropTypes.arrayOf(PropTypes.number),
-	stackBorder: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
+	insetBorder: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.number]),
 };
 
 CardStack.defaultProps = {
 	style: {},
+	className: '',
 	messy: defaultMessy,
-    messAngle: defaultMessAngle,
     stackLayerOffset: defaultStackLayerOffset,
 	stackLayerMaxOffset: defaultStackLayerMaxOffset,
-	randomNumbers: defaultRandomNumbers,
 	width: DEFAULT_CARD_WIDTH,
 	aspectRatio: 0.7,
-	stackBorder: true,
-	borderRadius: 6,
+	insetBorder: true,
+	borderRadius: '2%',
 };
 
-export { CardStackContext, getTransformForCardInCardStack };
+export { getTransformForCardInCardStack };
 export default CardStack;
+
+/**
+ * TODO:
+ * - In card stack
+ *  - Maybe introduce resizeObserver - only for warning if size is zero!
+ *  - Drop width and height for stack! (but still support aspectRatio!)
+ * 
+ * - In card row
+ * 	- No 'entry' animation
+ * 
+ * - In card
+ *  - Fix background sizing (switch card in storybook)!
+ */

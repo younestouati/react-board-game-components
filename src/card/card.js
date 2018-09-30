@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Flipper } from '../flipper/flipper';
-import { CardStackContext } from '../card-stack/card-stack';
+import CardContainerContext from '../shared/card-container-context';
 import isNullOrUndefined from '../utils/is-null-or-undefined';
 import isBoolean from '../utils/is-boolean';
 import isObject from '../utils/is-object';
@@ -59,7 +59,7 @@ const getStyle = (props, stackContext) => {
 	}
 
 	if (isBoolean(borderRadius)) {
-		borderRadiusStyle = borderRadius ? { borderRadius: '6px' } : {};
+		borderRadiusStyle = borderRadius ? { borderRadius: '2%' } : {};
 	} else if (isNumeric(borderRadius)) {
 		borderRadiusStyle = { borderRadius: `${borderRadius}px`}
 	}
@@ -76,19 +76,20 @@ const Card = (props) => {
 	const {
 		frontStyle,
 		backStyle,
-		borderRadius,
 		front,
 		back,
+		faceUp,
+		animateRotation,
 	} = props;
 	
 	return (
-		<CardStackContext.Consumer>
+		<CardContainerContext.Consumer>
 			{
-				stackContext => {
-					const styles = getStyle(props, stackContext);
+				cardContainerContext => {
+					const styles = getStyle(props, cardContainerContext);
 
-					const defaultWidth = stackContext.isInStack ? '100%' : DEFAULT_CARD_WIDTH;
-					const defaultHeight = stackContext.isInStack ? '100%' : DEFAULT_CARD_HEIGHT;
+					const defaultWidth = cardContainerContext.isInCardContainer ? '100%' : DEFAULT_CARD_WIDTH;
+					const defaultHeight = cardContainerContext.isInCardContainer ? '100%' : DEFAULT_CARD_HEIGHT;
 
 					const isWidthSet = !isNullOrUndefined(props.width);
 					const isHeightSet = !isNullOrUndefined(props.height) && props.height !== 0;
@@ -106,6 +107,10 @@ const Card = (props) => {
 					} else {
 						height = defaultHeight;
 					}
+
+					const rotation = isBoolean(faceUp)
+						? (faceUp ? 180 : 0)
+						: faceUp; // in this case faceUp is a number (degrees rotation around Y axis)
 
 					return (
 						<div
@@ -126,19 +131,18 @@ const Card = (props) => {
 								style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}
 							>
 								<Flipper
-									isFlipped={!getFirstDefinedValue(props.faceUp, stackContext.faceUp, false)}
-									rotation={getFirstDefinedValue(props.rotateY, stackContext.rotateY, 0)}
-									animateRotation={getFirstDefinedValue(props.animateRotation, stackContext.animateRotation, true)}
+									rotation={rotation}
+									animateRotation={animateRotation}
 								>
-									{renderSide(front, { ...styles, ...frontStyle })}
 									{renderSide(back, { ...styles, ...backStyle })}
+									{renderSide(front, { ...styles, ...frontStyle })}
 								</Flipper>
 							</div>
 						</div>
 					)
 				}
 			}
-		</CardStackContext.Consumer>
+		</CardContainerContext.Consumer>
 	);
 }
 
@@ -162,6 +166,8 @@ Card.propTypes = {
 Card.defaultProps = {
 	frontStyle: {},
 	backStyle: {},
+	animateRotation: true,
+	faceUp: false,
 };
 
 export { DEFAULT_CARD_HEIGHT, DEFAULT_CARD_WIDTH };
